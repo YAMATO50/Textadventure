@@ -1,0 +1,4 @@
+###
+15000 Rovertrip durch den Cajal-Krater
+50 Du gehst in richtung Luftschläuse und Öffnest einen Schrank
+100 Im Schrank ist ein Schutzanzug und ein Helm. Du nimmst beides und setzt es auf.
