@@ -1,0 +1,27 @@
+###
+Frühstück
+120 1 Brot mit Nährstoffpaste ~ Schoko geschmack-Erdbeer geschmack-Wurst geschmack-Neutralem geschmack
+73 1 Bretzel
+###
+Mittagessen
+850 3 Reis mit Hänchen und Soße / Reis mit Pute und Soße / Reis mit Gemüse und Soße
+750 1 Nudeln mit Tomatensoße
+500 1 Linsen mit Spätzle und Saitenwürstchen
+650 1 Pizza ~ Käse-Salami-Schinken-Pilzen-Ananas ~ Käse-Salami-Schinken-Pilzen-Ananas
+530 2 Gyrospfanne / Vegetarische Gyrospfanne ~ Reis-Zaziki-Schafskäse ~ Reis-Zaziki-Schafskäse
+###
+Abendessen
+150 2 Pommes / Wilde Kartoffeln
+780 1 Burger ~ Fleisch-Salat-Gurke-Tomate-Nichts ~ Fleisch-Salat-Gurke-Tomate-Nichts ~ Fleisch-Salat-Gurke-Tomate-Nichts
+###
+Nachtmenü
+150 1 Salat mit Geflügelstreifen
+70 1 Rote grütze mit Vanille Soße
+###
+Nachtisch
+70 1 Eis ~ Vanille-Schoko-Erdbeer
+120 2 Pudding / Puddingwaffeln ~ Vanille-Schoko
+###
+Beilage
+50 1 Salat
+20 1 Baguette stückchen
