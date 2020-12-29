@@ -1,23 +1,23 @@
 ###
-FrÃ¼hstÃ¼ck
-120 1 Brot mit NÃ¤hrstoffpaste ~ Schoko geschmack-Erdbeer geschmack-Wurst geschmack-Neutralem geschmack
+Frühstück
+120 1 Brot mit Nährstoffpaste ~ Schoko geschmack-Erdbeer geschmack-Wurst geschmack-Neutralem geschmack
 73 1 Bretzel
 ###
 Mittagessen
-850 3 Reis mit HÃ¤nchen und SoÃŸe / Reis mit Pute und SoÃŸe / Reis mit GemÃ¼se und SoÃŸe
-750 1 Nudeln mit TomatensoÃŸe
-500 1 Linsen mit SpÃ¤tzle und SaitenwÃ¼rstchen
-650 1 Pizza ~ KÃ¤se-Salami-Schinken-Pilzen-Ananas ~ KÃ¤se-Salami-Schinken-Pilzen-Ananas
-530 2 Gyrospfanne / Vegetarische Gyrospfanne ~ Reis-Zaziki-SchafskÃ¤se ~ Reis-Zaziki-SchafskÃ¤se
-150 1 Kuerbissuppe ~ Kürbiskerne-scharf-sehrScharf-EddiScharf ~ Kürbiskerne-scharf-sehrScharf-EddiScharf
+850 3 Reis mit Hänchen und Soße / Reis mit Pute und Soße / Reis mit Gemüse und Soße
+750 1 Nudeln mit Tomatensoße
+500 1 Linsen mit Spätzle und Saitenwürstchen
+650 1 Pizza ~ Käse-Salami-Schinken-Pilzen-Ananas ~ Käse-Salami-Schinken-Pilzen-Ananas
+530 2 Gyrospfanne / Vegetarische Gyrospfanne ~ Reis-Zaziki-Schafskäse ~ Reis-Zaziki-Schafskäse
+150 1 Kuerbissuppe ~ Kürbiskerne-scharf-sehr Scharf-Eddi Scharf ~ Kürbiskerne-scharf-sehr Scharf-Eddi Scharf
 ###
 Abendessen
 150 2 Pommes / Wilde Kartoffeln
 780 1 Burger ~ Fleisch-Salat-Gurke-Tomate-Nichts ~ Fleisch-Salat-Gurke-Tomate-Nichts ~ Fleisch-Salat-Gurke-Tomate-Nichts
 ###
-NachtmenÃ¼
-150 1 Salat mit GeflÃ¼gelstreifen
-70 1 Rote grÃ¼tze mit Vanille SoÃŸe
+Nachtmenü
+150 1 Salat mit Geflügelstreifen
+70 1 Rote grütze mit Vanille Soße
 ###
 Nachtisch
 70 1 Eis ~ Vanille-Schoko-Erdbeer
@@ -25,4 +25,4 @@ Nachtisch
 ###
 Beilage
 50 1 Salat
-20 1 Baguette stÃ¼ckchen
+20 1 Baguette stückchen
