@@ -9,7 +9,7 @@ Mittagessen
 500 1 Linsen mit Spätzle und Saitenwürstchen
 650 1 Pizza ~ Käse-Salami-Schinken-Pilzen-Ananas ~ Käse-Salami-Schinken-Pilzen-Ananas
 530 2 Gyrospfanne / Vegetarische Gyrospfanne ~ Reis-Zaziki-Schafskäse ~ Reis-Zaziki-Schafskäse
-150 1 Kuerbissuppe ~ Kürbiskerne-scharf-sehr Scharf-Eddi Scharf ~ Kürbiskerne-scharf-sehr Scharf-Eddi Scharf
+150 1 Kürbissuppe ~ Kürbiskerne-scharf-sehr Scharf-Eddi Scharf ~ Kürbiskerne-scharf-sehr Scharf-Eddi Scharf
 ###
 Abendessen
 150 2 Pommes / Wilde Kartoffeln
