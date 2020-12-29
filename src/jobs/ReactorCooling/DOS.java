@@ -83,26 +83,14 @@ public class DOS {
 						case 9:
 							ChangeParameter.flowRate();
 							break;
-						case 10:
-							FlowRateReader.read();
-							break;
 						case 12:
 							ChangeParameter.temperature();
-							break;
-						case 13:
-							TemperatureReader.read();
 							break;
 						case 15:
 							ChangeParameter.reservoirLevel();
 							break;
-						case 16:
-							ReservoirLevelReader.read();
-							break;
 						case 19:
 							ChangeParameter.refluxTemperature();
-							break;
-						case 20:
-							RefluxTemperatureReader.read();
 							break;
 						}
 					}
