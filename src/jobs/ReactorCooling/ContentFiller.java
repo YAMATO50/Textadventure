@@ -9,17 +9,17 @@ public class ContentFiller {
 	public static void fill() {
 		dosElement.add(new DosElement(0,-1,new int[] {1,2,3,4,5,6},0,"D:\\Pump",false));
 		dosElement.add(new DosElement(1,0,new int[] {7,8},0,"Kuehlwasser",true));
-		dosElement.add(new DosElement(7,1,new int[] {9,10,11},0,"Durchfluss",true));
-		dosElement.add(new DosElement(8,1,new int[] {12,13,14},0,"Temperatur",true));
-		dosElement.add(new DosElement(2,0,new int[] {15,16,17},0,"Reservoir",true));
+		dosElement.add(new DosElement(7,1,new int[] {9,11},0,"Durchfluss",true));
+		dosElement.add(new DosElement(8,1,new int[] {12,14},0,"Temperatur",true));
+		dosElement.add(new DosElement(2,0,new int[] {15,17},0,"Reservoir",true));
 		dosElement.add(new DosElement(3,0,new int[] {18},0,"Rueckwasser",true));
-		dosElement.add(new DosElement(18,3,new int[] {19,20,21},0,"Temperatur",true));
+		dosElement.add(new DosElement(18,3,new int[] {19,21},0,"Temperatur",true));
 		
 		dosElement.add(new DosElement(4,0,2,"update.exe"));
-		dosElement.add(new DosElement(10,7,2,"Pumpen.exe")); //flow rate
-		dosElement.add(new DosElement(13,8,2,"Kuehlwassertemperatur.exe")); //temp
-		dosElement.add(new DosElement(16,2,2,"Reservoir.exe")); // reservoir
-		dosElement.add(new DosElement(20,18,2,"Rueckflusstemperatur.exe")); //temp rück
+		dosElement.add(new DosElement(9,7,2,"Pumpen.exe")); //flow rate
+		dosElement.add(new DosElement(12,8,2,"Kuehlwassertemperatur.exe")); //temp
+		dosElement.add(new DosElement(15,2,2,"Reservoir.exe")); // reservoir
+		dosElement.add(new DosElement(19,18,2,"Rueckflusstemperatur.exe")); //temp rück
 		
 		String[] 	content = new String[] {	
 						"Befehle:",
