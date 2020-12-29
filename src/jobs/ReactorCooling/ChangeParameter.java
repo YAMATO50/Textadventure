@@ -68,8 +68,6 @@ public class ChangeParameter {
 			} else {
 				sublimationRate = sublimationRate + (choice * 5);
 				TemperatureReader.temperature = TemperatureReader.temperature - choice;
-				System.out.println();
-				System.out.println("Neue Kühlwassertemperatur: " + TemperatureReader.temperature + "°C");
 			}
 			
 		} else if (choice == 2) {
@@ -88,8 +86,6 @@ public class ChangeParameter {
 			} else {
 				sublimationRate = sublimationRate - (choice * 5);
 				TemperatureReader.temperature = TemperatureReader.temperature + choice;
-				System.out.println();
-				System.out.println("Neue Kühlwassertemperatur: " + TemperatureReader.temperature + "°C");
 			}
 		} else {
 			System.out.println("Bitte gib eine gültige Zahl ein!");
@@ -125,8 +121,6 @@ public class ChangeParameter {
 			} else {
 				solarRate = solarRate + (choice * 5);
 				TemperatureReader.temperature = TemperatureReader.temperature + choice * 2;
-				System.out.println();
-				System.out.println("Neue Kühlwassertemperatur: " + TemperatureReader.temperature + "°C");
 			}
 		} else if (choice == 2) {
 			System.out.println();
@@ -144,8 +138,6 @@ public class ChangeParameter {
 			} else {
 				solarRate = solarRate + (choice * 5);
 				TemperatureReader.temperature = TemperatureReader.temperature - choice * 2;
-				System.out.println();
-				System.out.println("Neue Kühlwassertemperatur: " + TemperatureReader.temperature + "°C");
 			}
 		} else {
 			System.out.println("Bitte gib eine gültige Zahl ein!");
@@ -198,8 +190,6 @@ public class ChangeParameter {
 					} else {
 						pumpPower = pumpPower + choice * 10;
 						FlowRateReader.flowRate = FlowRateReader.flowRate + choice * 10;
-						System.out.println();
-						System.out.println("Neue Durchflussrate: " + FlowRateReader.flowRate + " L/s");
 					}
 					
 				} else if (choice == 2) {
@@ -218,8 +208,6 @@ public class ChangeParameter {
 					} else {
 						pumpPower = pumpPower - choice * 10;
 						FlowRateReader.flowRate = FlowRateReader.flowRate - choice * 10;
-						System.out.println();
-						System.out.println("Neue Durchflussrate: " + FlowRateReader.flowRate + " L/s");
 					}
 				} else {
 					System.out.println("Bitte gib eine Gültige zahl ein!");
@@ -284,8 +272,6 @@ public class ChangeParameter {
 					} else {
 						reservoirSublimationRate = reservoirSublimationRate + choice * 5;
 						ReservoirLevelReader.reservoirLevel = ReservoirLevelReader.reservoirLevel - choice * 5;
-						System.out.println();
-						System.out.println("Neuer Reservoirfüllstand: " + ReservoirLevelReader.reservoirLevel + "%");
 					}
 					
 				} else if (choice == 2) {
@@ -304,8 +290,6 @@ public class ChangeParameter {
 					} else {
 						reservoirSublimationRate = reservoirSublimationRate - choice * 5;
 						ReservoirLevelReader.reservoirLevel = ReservoirLevelReader.reservoirLevel + choice * 5;
-						System.out.println();
-						System.out.println("Neuer Reservoirfüllstand: " + ReservoirLevelReader.reservoirLevel + "%");
 					}
 				} else {
 					System.out.println("Bitte gib eine Gültige zahl ein!");
@@ -341,8 +325,6 @@ public class ChangeParameter {
 					} else {
 						getRefluxWaterRate = getRefluxWaterRate + choice * 5;
 						ReservoirLevelReader.reservoirLevel = ReservoirLevelReader.reservoirLevel + choice * 5;
-						System.out.println();
-						System.out.println("Neuer Reservoirfüllstand: " + ReservoirLevelReader.reservoirLevel + "%");
 					}
 					
 				} else if (choice == 2) {
@@ -361,8 +343,6 @@ public class ChangeParameter {
 					} else {
 						getRefluxWaterRate = getRefluxWaterRate - choice * 5;
 						ReservoirLevelReader.reservoirLevel = ReservoirLevelReader.reservoirLevel - choice * 5;
-						System.out.println();
-						System.out.println("Neuer Reservoirfüllstand: " + ReservoirLevelReader.reservoirLevel + "%");
 					}
 				} else {
 					System.out.println("Bitte gib eine Gültige zahl ein!");
@@ -426,8 +406,6 @@ public class ChangeParameter {
 					} else {
 						refluxSublimationRate = refluxSublimationRate + choice * 5;
 						RefluxTemperatureReader.temperature = RefluxTemperatureReader.temperature - choice * 5;
-						System.out.println();
-						System.out.println("Neue Rückwassertemperatur: " + RefluxTemperatureReader.temperature + "°C");
 					}
 					
 				} else if (choice == 2) {
@@ -446,8 +424,6 @@ public class ChangeParameter {
 					} else {
 						refluxSublimationRate = refluxSublimationRate - choice * 5;
 						RefluxTemperatureReader.temperature = RefluxTemperatureReader.temperature + choice * 5;
-						System.out.println();
-						System.out.println("Neue Rückwassertemperatur: " + RefluxTemperatureReader.temperature + "°C");
 					}
 				} else {
 					System.out.println("Bitte gib eine Gültige zahl ein!");
@@ -483,8 +459,6 @@ public class ChangeParameter {
 					} else {
 						refluxHeatPower = refluxHeatPower + choice * 10;
 						RefluxTemperatureReader.temperature = RefluxTemperatureReader.temperature - choice * 5;
-						System.out.println();
-						System.out.println("Neue Rückwassertemperatur: " + RefluxTemperatureReader.temperature + "°C");
 					}
 					
 				} else if (choice == 2) {
@@ -503,8 +477,6 @@ public class ChangeParameter {
 					} else {
 						refluxHeatPower = refluxHeatPower - choice * 10;
 						RefluxTemperatureReader.temperature = RefluxTemperatureReader.temperature + choice * 5;
-						System.out.println();
-						System.out.println("Neue Rückwassertemperatur: " + RefluxTemperatureReader.temperature + "°C");
 					}
 				} else {
 					System.out.println("Bitte gib eine Gültige zahl ein!");
