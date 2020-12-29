@@ -16,10 +16,10 @@ public class ContentFiller {
 		dosElement.add(new DosElement(18,3,new int[] {19,20,21},0,"Temperatur",true));
 		
 		dosElement.add(new DosElement(4,0,2,"update.exe"));
-		dosElement.add(new DosElement(10,7,2,"Pumpen.exe")); //flow rate
-		dosElement.add(new DosElement(13,8,2,"Kuehlwassertemperatur.exe")); //temp
-		dosElement.add(new DosElement(16,2,2,"Reservoir.exe")); // reservoir
-		dosElement.add(new DosElement(20,18,2,"Rueckflusstemperatur.exe")); //temp rück
+		dosElement.add(new DosElement(9,7,2,"Pumpen.exe")); //flow rate
+		dosElement.add(new DosElement(12,8,2,"Kuehlwassertemperatur.exe")); //temp
+		dosElement.add(new DosElement(15,2,2,"Reservoir.exe")); // reservoir
+		dosElement.add(new DosElement(19,18,2,"Rueckflusstemperatur.exe")); //temp rück
 		
 		String[] 	content = new String[] {	
 						"Befehle:",
