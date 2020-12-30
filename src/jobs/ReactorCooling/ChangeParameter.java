@@ -12,7 +12,6 @@ public class ChangeParameter {
 		System.out.println();
 		System.out.print("Berechne");
 		TextTools.dddln();
-		System.out.println();
 		boolean stay = true;
 		while (stay) {
 			showStates();
@@ -155,7 +154,6 @@ public class ChangeParameter {
 		System.out.println();
 		System.out.print("Berechne");
 		TextTools.dddln();
-		System.out.println();
 		boolean stay = true;
 		while (stay) {
 			showStates();
@@ -240,7 +238,6 @@ public class ChangeParameter {
 		System.out.println();
 		System.out.print("Berechne");
 		TextTools.dddln();
-		System.out.println();
 		boolean stay = true;
 		while (stay) {
 			showStates();
@@ -378,7 +375,6 @@ public class ChangeParameter {
 		System.out.println();
 		System.out.print("Berechne");
 		TextTools.dddln();
-		System.out.println();
 		boolean stay = true;
 		while (stay) {
 			showStates();
@@ -521,6 +517,7 @@ public class ChangeParameter {
 	}
 	
 	private static void showStates() {
+		System.out.println();
 		System.out.print("Aktuelle Werte:");
 		System.out.println();
 		System.out.println("Durchfluss: " + FlowRateReader.flowRate + " L/s");
