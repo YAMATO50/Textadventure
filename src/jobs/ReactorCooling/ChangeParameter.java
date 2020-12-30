@@ -521,7 +521,7 @@ public class ChangeParameter {
 	}
 	
 	private static void showStates() {
-		System.out.print("Aktuelle Werte");
+		System.out.print("Aktuelle Werte:");
 		System.out.println();
 		System.out.println("Durchfluss: " + FlowRateReader.flowRate + " L/s");
 		System.out.println("Kühlwassertemperatur: " + TemperatureReader.temperature + " °C");
