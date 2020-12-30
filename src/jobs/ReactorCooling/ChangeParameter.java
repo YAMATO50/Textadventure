@@ -1,6 +1,7 @@
 package jobs.ReactorCooling;
 
 import adventure.text.Config;
+import adventure.text.TextAdventure;
 import adventure.text.TextTools;
 
 public class ChangeParameter {
@@ -520,10 +521,15 @@ public class ChangeParameter {
 		System.out.println();
 		System.out.print("Aktuelle Werte:");
 		System.out.println();
+		TextAdventure.wait(100);
 		System.out.println("Durchfluss: " + FlowRateReader.flowRate + " L/s");
+		TextAdventure.wait(100);
 		System.out.println("Kühlwassertemperatur: " + TemperatureReader.temperature + " °C");
+		TextAdventure.wait(100);
 		System.out.println("Rückflusswassertemperatur: " + RefluxTemperatureReader.temperature + " °C");
+		TextAdventure.wait(100);
 		System.out.println("Reservoirfüllstand: " + ReservoirLevelReader.reservoirLevel + "%");
+		TextAdventure.wait(100);
 		System.out.println();
 	}
 	
