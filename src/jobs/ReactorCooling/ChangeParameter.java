@@ -10,8 +10,12 @@ public class ChangeParameter {
 	
 	public static void temperature() {
 		System.out.println();
+		System.out.print("Berechne");
+		TextTools.dddln();
+		System.out.println();
 		boolean stay = true;
 		while (stay) {
+			showStates();
 			System.out.println("Was möchtest du tun?");
 			System.out.println("[1] Durchflussanteil durch Sublimationskühlung ändern");
 			System.out.println("[2] Durchflussanteil durch Solarzellen ändern");
@@ -149,8 +153,12 @@ public class ChangeParameter {
 	
 	public static void flowRate() {
 		System.out.println();
+		System.out.print("Berechne");
+		TextTools.dddln();
+		System.out.println();
 		boolean stay = true;
 		while (stay) {
+			showStates();
 			System.out.println("Was möchtest du tun?");
 			System.out.println("[1] Pumpleistung der Kühlwasserpumpen Ändern");
 			System.out.println("[2] Exit");
@@ -230,8 +238,12 @@ public class ChangeParameter {
 	
 	public static void reservoirLevel() {
 		System.out.println();
+		System.out.print("Berechne");
+		TextTools.dddln();
+		System.out.println();
 		boolean stay = true;
 		while (stay) {
+			showStates();
 			System.out.println("Was möchtest du tun?");
 			System.out.println("[1] Abgabe des Wassers an die Sublimationskühlung ändern");
 			System.out.println("[2] Rückgewinngungsgeschwindigkeit des Rückwassers ändern");
@@ -364,8 +376,12 @@ public class ChangeParameter {
 	
 	public static void refluxTemperature() {
 		System.out.println();
+		System.out.print("Berechne");
+		TextTools.dddln();
+		System.out.println();
 		boolean stay = true;
 		while (stay) {
+			showStates();
 			System.out.println("Was möchtest du tun?");
 			System.out.println("[1] Durchflussanteil durch die Sublimationskühlung ändern");
 			System.out.println("[2] Heizleistung des Rückwassers in der Kuppel ändern");
