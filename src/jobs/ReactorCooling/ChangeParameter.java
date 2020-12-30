@@ -40,7 +40,7 @@ public class ChangeParameter {
 			default:
 				System.out.println("Bitte gib eine Gültige zahl ein!");
 			}
-			
+			Tick.tick();
 		}
 	}
 	
@@ -228,7 +228,7 @@ public class ChangeParameter {
 			default:
 				System.out.println("Bitte gib eine Gültige zahl ein!");
 			}
-			
+			Tick.tick();
 		}
 	}
 	
@@ -365,7 +365,7 @@ public class ChangeParameter {
 			default:
 				System.out.println("Bitte gib eine Gültige zahl ein!");
 			}
-			
+			Tick.tick();
 		}
 	}
 	
@@ -502,7 +502,7 @@ public class ChangeParameter {
 			default:
 				System.out.println("Bitte gib eine Gültige zahl ein!");
 			}
-			
+			Tick.tick();
 		}
 	}
 	
