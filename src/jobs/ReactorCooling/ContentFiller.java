@@ -66,7 +66,7 @@ public class ContentFiller {
 						"Toleranz:\t+/- 5°C",
 						"",
 						"Reservoir:\t¥% gefüllt",
-						"Toleranz:\t+/- 4%"};
+						"Toleranz:\t+/- 4%"}; //The symbols ¢, £, ¤, ¥ are later replaced with the actual numbers
 		dosElement.add(new DosElement(6,0,1,"werte.txt",content));
 					content = new String[] {
 						"Der Durchfluss ist die menge an Wasser, die vom Reservoir zum Reaktor geleitet wird",
