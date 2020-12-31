@@ -80,8 +80,8 @@ public class ContentFiller {
 						"",
 						"Beeinflusst durch änderung:",
 						"",
-						"Reservoirstand:\t\t\t\t+/- 1%   pro 1000 L/s",
-						"Rückwassertemperatur:\t\t\t+/- 10°C pro 1000 L/s"};
+						"Reservoirstand",
+						"Rückwassertemperatur"};
 			dosElement.add(new DosElement(11,7,1,"info.txt",content));
 					content = new String[] {
 						"Die Kühlwassertemperatur ist die Temperatur die das Kühlwasser hat bevor es in den Reaktor geleitet wird",
@@ -96,7 +96,7 @@ public class ContentFiller {
 						"",
 						"Beeinflusst durch änderung:",
 						"",
-						"Rückwassertemperatur:\t\t\t\t\t\t+/- 2°C pro 5°C"};
+						"Rückwassertemperatur"};
 		dosElement.add(new DosElement(14,8,1,"info.txt",content));
 					content = new String[] {
 						"Das Reservoir beinhaltet eine große menge an Wasser die zum Kühlen verwendet wird",
@@ -112,7 +112,7 @@ public class ContentFiller {
 						"",
 						"Beeinflusst durch änderung:",
 						"",
-						"Kühlwassertemperatur:\t\t\t\t\t-/+ 1°C pro 10% Füllstandsänderung"};
+						"Kühlwassertemperatur"};
 		dosElement.add(new DosElement(17,2,1,"info.txt",content));
 					content = new String[] {
 						"Die Rückwassertemperatur ist die Temperatur die das Kühlwasser hat nachdem es in den Reaktor geleitet wurde",
@@ -128,7 +128,7 @@ public class ContentFiller {
 						"",
 						"Beeinflusst durch änderung:",
 						"",
-						"Kühlwassertemperatur:\t\t\t\t\t\t+/- 2°C pro 10°C"};
+						"Kühlwassertemperatur"};
 		dosElement.add(new DosElement(21,18,1,"info.txt",content));
 			
 		DOS.dosElement = dosElement;
