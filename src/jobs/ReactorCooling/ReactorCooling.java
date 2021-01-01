@@ -47,10 +47,11 @@ public class ReactorCooling {
 			TextTools.slowTextln("Na dann leg los! Du weißt ja wie es geht.", 75);
 		} else {
 			TextTools.slowTextln("Okay, dann erkläre ich dir mal alles!"
-					+ "\n" + "Dort drüben an dem Rechner kommen alle Informationen der Kühlpumpen an"
+					+ "\n" + "Dort drüben an dem Rechner kommen alle Informationen der Kühlanlage an"
 					+ "\n" + "Du musst schauen dass die werte für Kühlwassertemparatur, Kühlwasserdurchfluss, Rückwassertemperatur und"
 					+ "\n" + "Reservoirfüllstand im grünen bereich sind. Die werte dazu findest du in der \"werte.txt\" auf dem Computer."
 					+ "\n" + "Du musst dich leider mit DOS rumschlagen, aber das packst du schon! In der \"help.txt\" steht wie das geht."
+					+ "\n" + "Aber noch ein kleiner tipp für dich. Gib in jedem orgnder \"dir\" ein, um zu sehen was in dem ordner ist."
 					+ "\n" + "Wenn einer der Werte ausserhalb der Toleranz liegt, musst du in einem Progamm speziell für die funktion die Parameter"
 					+ "\n" + "neu einstellen. Weitere informationen dazu findest du dann in den entsprechenden \"info.txt\" dateien zu den Programmen."
 					+ "\n" + "Wenn du fertig bist, und alle werte in ordnung sind, rufe die \"update.exe\" auf. Du kannst dann wieder zu mir kommen und dein Geld"
