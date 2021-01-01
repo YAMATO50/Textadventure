@@ -18,11 +18,11 @@ public class ReactorCooling {
 	
 	private static void introduction() {
 		System.out.println("Du gehst in Richtung Reaktorkuppel");
-		TextAdventure.wait(1500);
+		TextAdventure.wait(1000);
 		System.out.println("In der Reaktorkuppel angekommen kommt dir ein Mann entgegen");
-		TextAdventure.wait(1500);
+		TextAdventure.wait(1000);
 		System.out.println("Auf seinem Schildchen an seinem anzug steht \"Tobias Ingram, Reaktor Leiter\"");
-		TextAdventure.wait(1500);
+		TextAdventure.wait(1000);
 		TextTools.slowTextln("Hi, " + Config.save.playerName + " Herzlich Willkommen in der Reaktorkuppel!", 75);
 		TextTools.slowTextln("Ich bin Tobias Ingram, der Leiter der Reaktorkuppel.", 75);
 		TextTools.slowTextln("Du bist also hier um die Reaktorkühlung zu prüfen. Hast du das schonmal gemacht?", 75);
@@ -46,11 +46,12 @@ public class ReactorCooling {
 			TextTools.slowTextln("Ich kann mir einfach nie merken wer schonmal hier war und wer nicht!", 75);
 			TextTools.slowTextln("Na dann leg los! Du weißt ja wie es geht.", 75);
 		} else {
-			TextTools.slowTextln("Okay, dann erkläre ich dir mal alles!", 75);
-			TextTools.slowTextln("Dort drüben an dem Rechner kommen alle Informationen der Kühlpumpen an",75);
-			TextTools.slowTextln("Du musst schauen dass die werte für Kühlwassertemparatur, Kühlwasserdurchfluss, Rückwassertemperatur und"
+			TextTools.slowTextln("Okay, dann erkläre ich dir mal alles!"
+					+ "\n" + "Dort drüben an dem Rechner kommen alle Informationen der Kühlanlage an"
+					+ "\n" + "Du musst schauen dass die werte für Kühlwassertemparatur, Kühlwasserdurchfluss, Rückwassertemperatur und"
 					+ "\n" + "Reservoirfüllstand im grünen bereich sind. Die werte dazu findest du in der \"werte.txt\" auf dem Computer."
 					+ "\n" + "Du musst dich leider mit DOS rumschlagen, aber das packst du schon! In der \"help.txt\" steht wie das geht."
+					+ "\n" + "Aber noch ein kleiner tipp für dich. Gib in jedem orgnder \"dir\" ein, um zu sehen was in dem ordner ist."
 					+ "\n" + "Wenn einer der Werte ausserhalb der Toleranz liegt, musst du in einem Progamm speziell für die funktion die Parameter"
 					+ "\n" + "neu einstellen. Weitere informationen dazu findest du dann in den entsprechenden \"info.txt\" dateien zu den Programmen."
 					+ "\n" + "Wenn du fertig bist, und alle werte in ordnung sind, rufe die \"update.exe\" auf. Du kannst dann wieder zu mir kommen und dein Geld"
