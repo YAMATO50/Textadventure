@@ -18,11 +18,11 @@ public class ReactorCooling {
 	
 	private static void introduction() {
 		System.out.println("Du gehst in Richtung Reaktorkuppel");
-		TextAdventure.wait(1500);
+		TextAdventure.wait(1000);
 		System.out.println("In der Reaktorkuppel angekommen kommt dir ein Mann entgegen");
-		TextAdventure.wait(1500);
+		TextAdventure.wait(1000);
 		System.out.println("Auf seinem Schildchen an seinem anzug steht \"Tobias Ingram, Reaktor Leiter\"");
-		TextAdventure.wait(1500);
+		TextAdventure.wait(1000);
 		TextTools.slowTextln("Hi, " + Config.save.playerName + " Herzlich Willkommen in der Reaktorkuppel!", 75);
 		TextTools.slowTextln("Ich bin Tobias Ingram, der Leiter der Reaktorkuppel.", 75);
 		TextTools.slowTextln("Du bist also hier um die Reaktorkühlung zu prüfen. Hast du das schonmal gemacht?", 75);
