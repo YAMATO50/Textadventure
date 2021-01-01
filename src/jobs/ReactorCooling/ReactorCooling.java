@@ -46,9 +46,9 @@ public class ReactorCooling {
 			TextTools.slowTextln("Ich kann mir einfach nie merken wer schonmal hier war und wer nicht!", 75);
 			TextTools.slowTextln("Na dann leg los! Du weißt ja wie es geht.", 75);
 		} else {
-			TextTools.slowTextln("Okay, dann erkläre ich dir mal alles!", 75);
-			TextTools.slowTextln("Dort drüben an dem Rechner kommen alle Informationen der Kühlpumpen an",75);
-			TextTools.slowTextln("Du musst schauen dass die werte für Kühlwassertemparatur, Kühlwasserdurchfluss, Rückwassertemperatur und"
+			TextTools.slowTextln("Okay, dann erkläre ich dir mal alles!"
+					+ "\n" + "Dort drüben an dem Rechner kommen alle Informationen der Kühlpumpen an"
+					+ "\n" + "Du musst schauen dass die werte für Kühlwassertemparatur, Kühlwasserdurchfluss, Rückwassertemperatur und"
 					+ "\n" + "Reservoirfüllstand im grünen bereich sind. Die werte dazu findest du in der \"werte.txt\" auf dem Computer."
 					+ "\n" + "Du musst dich leider mit DOS rumschlagen, aber das packst du schon! In der \"help.txt\" steht wie das geht."
 					+ "\n" + "Wenn einer der Werte ausserhalb der Toleranz liegt, musst du in einem Progamm speziell für die funktion die Parameter"
