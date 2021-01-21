@@ -46,7 +46,7 @@ public class TextAdventure {
 		    System.out.println("[4] Park 'Kuppel-Grün'");
 		    System.out.println("[5] Jobcenter");
 		    System.out.println("[6] Bankautomat");
-		    System.out.println("[7] Zurück ins Zimmer gehen");
+		    System.out.println("[7] In dein Zimmer gehen");
 		    int checkForError = 0;
 		    
 		    String input = Config.keyScan.nextLine();
