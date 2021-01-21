@@ -76,7 +76,6 @@ public class Room {
 				System.out.println("Du gehst zurück in die Hauptkuppel");
 				break;
 			case 5:			
-			    System.out.println("Auf wiedersehen!"); //hier findet sich bestimmt noch was besseres
 			    if (wasSleeping) {
 					Config.save.setTime(Config.save.time - 1);
 				}

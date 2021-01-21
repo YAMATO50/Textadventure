@@ -23,6 +23,7 @@ public class TextAdventure {
 			//setzt den spieler direkt in den start loop 
 		case 1:
 			System.out.println("Herzlich Willkommen in der Hauptkuppel der Caja-Basis auf dem Mond.");
+			coreLoop();
 			break;
 		}
 	}
@@ -104,9 +105,6 @@ public class TextAdventure {
 		    	}
 		    	Config.save.setMoney(money);
 		}
-	    
-	    wait(7 * 1000);
-	    //In der Config wird dann gespeichert
 	}
 	
 	public static void wait(int millis) {
