@@ -24,7 +24,7 @@ public class Room {
 			int choice;
 			do {
 				choice = TextAdventure.getIntFromUser();
-				if (choice < 1 || choice > 4) {
+				if (choice < 1 || choice > 5) {
 					choice = -1;
 					System.out.println("Bitte wähle eine gültige Option!");
 				}
@@ -77,9 +77,16 @@ public class Room {
 				break;
 			case 5:			
 			    System.out.println("Auf wiedersehen!"); //hier findet sich bestimmt noch was besseres
+			    if (wasSleeping) {
+					Config.save.setTime(Config.save.time - 1);
+				}
 				return false;
 			}
 			
+		}
+		
+		if (wasSleeping) {
+			Config.save.setTime(Config.save.time - 1);
 		}
 		
 		return true;
