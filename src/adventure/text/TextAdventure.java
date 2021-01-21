@@ -46,7 +46,7 @@ public class TextAdventure {
 		    System.out.println("[4] Park 'Kuppel-Grün'");
 		    System.out.println("[5] Jobcenter");
 		    System.out.println("[6] Bankautomat");
-		    System.out.println("[7] Zurück ins Zimmer gehen (Programm wird beendet)");
+		    System.out.println("[7] Zurück ins Zimmer gehen");
 		    int checkForError = 0;
 		    
 		    String input = Config.keyScan.nextLine();
@@ -85,7 +85,7 @@ public class TextAdventure {
 		    		ATM.moneyRequest(money);
 		    		break;
 		    	case 7 :
-		    		stay = false;
+		    		stay = Room.room();
 		    		break;
 		    	case 8 :
 		    		if (checkForError == 1) {
@@ -104,9 +104,6 @@ public class TextAdventure {
 		    	}
 		    	Config.save.setMoney(money);
 		}
-		
-		System.out.println("Du gehst in dein zimmer und tust was auch immer du tust.");
-	    System.out.println("Auf wiedersehen!");
 	    
 	    wait(7 * 1000);
 	    //In der Config wird dann gespeichert
