@@ -172,7 +172,7 @@ public class ProcessSaveFiles {
 	}
 	
 	public static void saveGameData() {
-		String jsonToSave = new Gson().toJson(Save.class);
+		String jsonToSave = new Gson().toJson(Config.save, Save.class);
 		tempSave.add(jsonToSave);
 		File saveFile = new File("Save.json");
 		boolean succes = SaveLoad.save(saveFile);

@@ -2,6 +2,7 @@ package adventure.text;
 import java.util.ArrayList;
 import java.util.Date;
 import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -23,6 +24,12 @@ public class Log {
 		String fileName = timeRelatetFileName();
 		
 		File saveLog = new File(fileName);
+		try {
+			saveLog.createNewFile();
+		} catch (IOException e) {
+			System.out.println("Failed to create Logfile!");
+			System.out.println(e.toString());
+		}
 		boolean saveSucces = SaveLoad.save(saveLog);
 		if (!saveSucces && potentialyProblematic) { //Wichtig für debugging zwecke. Sollten keine probleme auftreten ist es nicht so schlimm wenn keine logdatei vorhanden ist
 			for (int i = 0; i < logList.size(); i++) {
@@ -40,7 +47,7 @@ public class Log {
 	private static String timeRelatetFileName() {
 		String fileName = "";
 		
-		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-HH:mm:ss");
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-HH mm ss");
 		Date date = new Date();
 		String strDate = dateFormat.format(date);
 		

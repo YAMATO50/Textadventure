@@ -9,7 +9,6 @@ public class SaveLoad {
 
 	public static boolean save(File fileToSave) { //Gibt in einem boolean zurück ob das speichern erfolgreich war
 		ArrayList<String> fileContent = ProcessSaveFiles.tempSave;
-		ProcessSaveFiles.tempSave.clear();
 		try {
 			PrintWriter output = new PrintWriter(fileToSave);
 			for (int i = 0; i < fileContent.size(); i++) {
@@ -21,10 +20,16 @@ public class SaveLoad {
 			Log.log("Further informations: ");
 			Log.log(fileToSave.getAbsolutePath());
 			Log.log(e.getMessage());
-			Log.log(e.getCause().toString());
+			
+			if (e.getCause() != null) {
+				Log.log(e.getCause().toString());
+			}
+			
 			Log.out("Daten konnten in Datei " + fileToSave.getName() + " nicht gespeichert werden! Für genauere informationen schaue bitte in die Log datei!");
+			ProcessSaveFiles.tempSave.clear();
 			return false;
 		}
+		ProcessSaveFiles.tempSave.clear();
 		return true;
 	}
 	

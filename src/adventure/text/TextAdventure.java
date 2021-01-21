@@ -23,6 +23,7 @@ public class TextAdventure {
 			//setzt den spieler direkt in den start loop 
 		case 1:
 			System.out.println("Herzlich Willkommen in der Hauptkuppel der Caja-Basis auf dem Mond.");
+			coreLoop();
 			break;
 		}
 	}
