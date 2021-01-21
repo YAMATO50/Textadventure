@@ -11,6 +11,7 @@ public class Room {
 		System.out.println("An Zimmer 404 holst du deine schlüsselkarte heraus und gehst hinein.");
 		
 		boolean stayInRoom = true;
+		boolean wasSleeping = false;
 		while (stayInRoom) {
 			System.out.println();
 			System.out.println("Was möchtest du tun?");
@@ -59,12 +60,13 @@ public class Room {
 				
 				System.out.println("Du gehst Zähneputzen und legst dich in dein Bett.");
 				System.out.println("Gemütlich schläfst du ein.");
-				TextTools.slowTextln("Zzz Zzz Zzz", 100);
+				TextTools.slowTextln("Zzz Zzz Zzz", 500);
 				
-				TextTools.slowTextln("BEEP BEEP BEEP BEEP BEEP BEEP", 35);
+				TextTools.slowTextln("BEEP BEEP BEEP BEEP BEEP BEEP", 100);
 				System.out.println("Der aggresive Wecker reißt dich aus deinem Schlaf.");
 				System.out.println("Auf dem Wecker steht " + Config.save.time + ":00 Uhr");
 				
+				wasSleeping = true;
 				break;
 			case 3:
 				credits();
