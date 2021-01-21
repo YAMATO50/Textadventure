@@ -105,9 +105,6 @@ public class TextAdventure {
 		    	}
 		    	Config.save.setMoney(money);
 		}
-	    
-	    wait(7 * 1000);
-	    //In der Config wird dann gespeichert
 	}
 	
 	public static void wait(int millis) {

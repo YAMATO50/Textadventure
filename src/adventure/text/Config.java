@@ -19,6 +19,8 @@ public class Config {
 
 		save();
 		keyScan.close();
+		System.out.println("Auf wiedersehen!"); //hier findet sich bestimmt noch was besseres
+		TextAdventure.wait(10000);
 	}
 	
 	private static void load() {
