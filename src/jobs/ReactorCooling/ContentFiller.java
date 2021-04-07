@@ -34,7 +34,7 @@ public class ContentFiller {
 						"",
 						"Um eine Datei zu öffnen gib einfach den Namen der Datei ein (mit Endung)",
 						"",
-						"<DIR> = Verzeichnis",
+						"<DIR> = Verzeichnis = Ordner",
 						"",
 						"Funktionsweise:",
 						"",
@@ -99,10 +99,10 @@ public class ContentFiller {
 						"",
 						"",
 						"Änderung der durchflussanteils durch die Solarzellen:\t\t+ 5% (= Minimale Schrittweite)",
-						"Resultierende Temperaturänderung:\t\t\t\t+ 2°C",
+						"Resultierende Temperaturänderung:\t\t\t\t+ 4°C",
 						"",
 						"Änderung der durchflussanteils durch die Solarzellen:\t\t- 5% (= Minimale Schrittweite)",
-						"Resultierende Temperaturänderung:\t\t\t\t- 2°C",
+						"Resultierende Temperaturänderung:\t\t\t\t- 4°C",
 						"",
 						"Beeinflusst durch änderung:",
 						"",
@@ -165,30 +165,12 @@ public class ContentFiller {
 	
 	public static void setValues() {
 		
-		int[] setToValues = temperatureSetter();
+		initiateAllValues();
 		
-		ChangeParameter.sublimationRate = setToValues[0];
-		ChangeParameter.solarRate = setToValues[1];
-		TemperatureReader.temperature = setToValues[2];
-		targetTemperature = setToValues[3];
-		
-		FlowRateReader.flowRate = ThreadLocalRandom.current().nextInt(1000,11000);
-		targetFlowRate = ThreadLocalRandom.current().nextInt(4500,7000);
-		ChangeParameter.pumpPower = FlowRateReader.flowRate;
-		
-		setToValues = refluxTemperatureSetter();
-		
-		ChangeParameter.refluxSublimationRate = setToValues[0];
-		ChangeParameter.refluxHeatPower = setToValues[1];
-		RefluxTemperatureReader.temperature = setToValues[2];
-		targetRefluxTemperature = setToValues[3];
-		
-		setToValues = reservoirLevelSetter();
-		
-		ChangeParameter.reservoirSublimationRate = setToValues[0];
-		ChangeParameter.getRefluxWaterRate = setToValues[1];
-		ReservoirLevelReader.reservoirLevel = setToValues[2];
-		targetReservoirLevel = setToValues[3];
+		targetTemperature = temperatureSetter();
+		targetFlowRate = flowRateSetter();
+		targetRefluxTemperature = refluxTemperatureSetter();
+		targetReservoirLevel = reservoirLevelSetter();
 		
 		for (int i = 0; i < DOS.dosElement.size(); i++) {
 			if (DOS.dosElement.get(i).location == 6) {
@@ -207,113 +189,226 @@ public class ContentFiller {
 		
 	}
 	
-	public static int[] temperatureSetter() {
+	private static int temperatureSetter() {
 		
-		int[] returner = new int[4];
+		int currentTemp = TemperatureReader.temperature;
 		
 		//Defining "0"
-		int cooling = ThreadLocalRandom.current().nextInt(4, 18) * 5;
-		int warming = ThreadLocalRandom.current().nextInt(4,18) * 5;
+		int cooling = ThreadLocalRandom.current().nextInt(2,9);
+		int heating = ThreadLocalRandom.current().nextInt(4,7);
 		
-		int variabilityUp = (cooling / 5) + (warming / 5) * 2;
-		int variabilityDown = ((100 - cooling) / 5) + ((100 - warming) / 5) * 2;
+		ChangeParameter.sublimationRate = cooling;
+		ChangeParameter.solarRate = heating;
 		
-		int currentTemp = ThreadLocalRandom.current().nextInt(30,60);
-		int goalTemp = 0;
+		int coolingSteps = ThreadLocalRandom.current().nextInt(1-cooling,9-cooling);
 		
-		if (ThreadLocalRandom.current().nextInt(0,2) == 0) {
-			// Temperatur zu niedrig
-			goalTemp = currentTemp + (int) ((float) variabilityUp * ((float) ThreadLocalRandom.current().nextInt(30,90) / 100));
+		if (coolingSteps < 0) {
+			coolingSteps = coolingSteps * -1;
 			
+			for (int i = 0; i < coolingSteps; i++) {
+				TemperatureReader.temperature += 2;
+				ChangeParameter.sublimationRate -= 1;
+				Tick.simulateTick();
+			}
+			Tick.simulateTick();
 		} else {
-			//temperatur zu hoch
-			goalTemp = currentTemp - (int) ((float) variabilityDown * ((float) ThreadLocalRandom.current().nextInt(30,90) / 100));
+			for (int i = 0; i < coolingSteps; i++) {
+				TemperatureReader.temperature -= 2;
+				ChangeParameter.sublimationRate += 1;
+				Tick.simulateTick();
+			}
+			Tick.simulateTick();
+		}
+		
+		
+		int solarSteps = ThreadLocalRandom.current().nextInt(4-heating,9-heating);
+		
+		if (solarSteps < 0) {
+			solarSteps = solarSteps * -1;
 			
+			for (int i = 0; i < solarSteps; i++) {
+				TemperatureReader.temperature -= 8;
+				ChangeParameter.solarRate -= 1;
+				Tick.simulateTick();
+			}
+			Tick.simulateTick();
+		} else {
+			for (int i = 0; i < solarSteps; i++) {
+				TemperatureReader.temperature += 8;
+				ChangeParameter.solarRate += 1;
+				Tick.simulateTick();
+			}
+			Tick.simulateTick();
 		}
 		
-		if (goalTemp <= 0) {
-			goalTemp = 1;
-		}
-		
-		returner[0] = cooling;
-		returner[1] = warming;
-		returner[2] = currentTemp;
-		returner[3] = goalTemp;
-		
-		return returner;
+		int goalTemp = TemperatureReader.temperature;
+		TemperatureReader.temperature = currentTemp;
+		ChangeParameter.sublimationRate = cooling * 10;
+		ChangeParameter.solarRate = heating * 10;
+		return goalTemp;
 		
 	}
 	
-	public static int[] refluxTemperatureSetter() {
-		
-		int[] returner = new int[4];
+	private static int flowRateSetter() {
+		int currentFlow = FlowRateReader.flowRate;
 		
 		//Defining "0"
-		int coolingA = ThreadLocalRandom.current().nextInt(4, 18) * 5;
-		int coolingB = ThreadLocalRandom.current().nextInt(4, 18) * 10;
+		int flowRate = currentFlow;
 		
-		int variabilityUp = (100 - coolingA) + ((100 - coolingB) / 2);
-		int variabilityDown = coolingA + coolingB / 2;
+		ChangeParameter.pumpPower = flowRate;
 		
-		int currentTemp = ThreadLocalRandom.current().nextInt(85,240);
-		int goalTemp = 0;
+		int flowSteps = ThreadLocalRandom.current().nextInt(200-flowRate,1000-flowRate);
 		
-		if (ThreadLocalRandom.current().nextInt(0,2) == 0) {
-			// Temperatur zu niedrig
-			goalTemp = currentTemp - (int) ((float) variabilityUp * ((float) ThreadLocalRandom.current().nextInt(30,90) / 100));
+		if (flowSteps < 0) {
+			flowSteps = flowSteps * -1;
 			
+			for (int i = 0; i < flowSteps; i++) {
+				FlowRateReader.flowRate -= 1;
+				ChangeParameter.pumpPower -= 1;
+				Tick.simulateTick();
+			}
+			Tick.simulateTick();
 		} else {
-			//temperatur zu hoch
-			goalTemp = currentTemp + (int) ((float) variabilityDown * ((float) ThreadLocalRandom.current().nextInt(30,90) / 100));
+			for (int i = 0; i < flowSteps; i++) {
+				FlowRateReader.flowRate += 1;
+				ChangeParameter.pumpPower += 1;
+				Tick.simulateTick();
+			}
+			Tick.simulateTick();
+		}
+		
+		int goalFlow = FlowRateReader.flowRate;
+		FlowRateReader.flowRate = currentFlow;
+		ChangeParameter.pumpPower = flowRate;
+		
+		return goalFlow;
+	}
+	
+	private static int refluxTemperatureSetter() {
+		
+		int currentTemp = RefluxTemperatureReader.temperature;
+		
+		//Defining "0"
+		int cooling = ThreadLocalRandom.current().nextInt(2,9);
+		int heating = ThreadLocalRandom.current().nextInt(10,40);
+		
+		ChangeParameter.refluxSublimationRate = cooling;
+		ChangeParameter.refluxHeatPower = heating;
+		
+		int coolingSteps = ThreadLocalRandom.current().nextInt(1-cooling,9-cooling);
+		
+		if (coolingSteps < 0) {
+			coolingSteps = coolingSteps * -1;
 			
+			for (int i = 0; i < coolingSteps; i++) {
+				RefluxTemperatureReader.temperature += 10;
+				ChangeParameter.refluxSublimationRate -= 1;
+				Tick.simulateTick();
+			}
+			Tick.simulateTick();
+		} else {
+			for (int i = 0; i < coolingSteps; i++) {
+				RefluxTemperatureReader.temperature -= 10;
+				ChangeParameter.refluxSublimationRate += 1;
+				Tick.simulateTick();
+			}
+			Tick.simulateTick();
 		}
 		
-		if (goalTemp <= 0) {
-			goalTemp = 1;
+		int heaterSteps = ThreadLocalRandom.current().nextInt(10-heating,40-heating);
+		
+		if (heaterSteps < 0) {
+			heaterSteps = heaterSteps * -1;
+			
+			for (int i = 0; i < heaterSteps; i++) {
+				RefluxTemperatureReader.temperature -= 5;
+				ChangeParameter.refluxHeatPower -= 10;
+				Tick.simulateTick();
+			}
+			Tick.simulateTick();
+		} else {
+			for (int i = 0; i < heaterSteps; i++) {
+				RefluxTemperatureReader.temperature += 5;
+				ChangeParameter.refluxHeatPower += 10;
+				Tick.simulateTick();
+			}
+			Tick.simulateTick();
 		}
 		
-		returner[0] = coolingA;
-		returner[1] = coolingB;
-		returner[2] = currentTemp;
-		returner[3] = goalTemp;
+		int goalTemp = RefluxTemperatureReader.temperature;
+		RefluxTemperatureReader.temperature = currentTemp;
+		ChangeParameter.refluxSublimationRate = cooling * 10;
+		ChangeParameter.refluxHeatPower = heating * 10;
 		
-		return returner;
+		return goalTemp;
 		
 	}
 
-	public static int[] reservoirLevelSetter() {
-		int[] returner = new int[4];
+	private static int reservoirLevelSetter() {
+		
+		int currentLevel = ReservoirLevelReader.reservoirLevel;
 		
 		//Defining "0"
-		int sublimation = ThreadLocalRandom.current().nextInt(4,18) * 5;
-		int fasterReflux = ThreadLocalRandom.current().nextInt(4,32) * 5;
+		int sublimationParts = ThreadLocalRandom.current().nextInt(2,9);
+		int fasterGain = ThreadLocalRandom.current().nextInt(2,9);
 		
-		int variabilityDown = (sublimation / 5) + (fasterReflux / 5);
-		int variabilityUp = ((100 - sublimation) / 5) + ((200 - fasterReflux) / 5);
+		ChangeParameter.reservoirSublimationRate = sublimationParts;
+		ChangeParameter.getRefluxWaterRate = fasterGain;
 		
-		int currentLevel = ThreadLocalRandom.current().nextInt(45,100);
-		int goalLevel = 0;
+		int sublimationRateSteps = ThreadLocalRandom.current().nextInt(1-sublimationParts,9-sublimationParts);
 		
-		if (ThreadLocalRandom.current().nextInt(0,2) == 0) {
-			// Temperatur zu hoch
-			goalLevel = currentLevel - (int) ((float) variabilityUp * ((float) ThreadLocalRandom.current().nextInt(10,90) / 100));
+		if (sublimationRateSteps < 0) {
+			sublimationRateSteps = sublimationRateSteps * -1;
 			
+			for (int i = 0; i < sublimationRateSteps; i++) {
+				ReservoirLevelReader.reservoirLevel += 10;
+				ChangeParameter.reservoirSublimationRate -= 1;
+				Tick.simulateTick();
+			}
+			Tick.simulateTick();
 		} else {
-			//temperatur zu niedrig
-			goalLevel = currentLevel + (int) ((float) variabilityDown * ((float) ThreadLocalRandom.current().nextInt(10,90) / 100));
+			for (int i = 0; i < sublimationRateSteps; i++) {
+				ReservoirLevelReader.reservoirLevel -= 10;
+				ChangeParameter.reservoirSublimationRate += 1;
+				Tick.simulateTick();
+			}
+			Tick.simulateTick();
+		}
+		
+		int fasterGainSteps = ThreadLocalRandom.current().nextInt(1-fasterGain,9-fasterGain);
+		
+		if (fasterGainSteps < 0) {
+			fasterGainSteps = fasterGainSteps * -1;
 			
+			for (int i = 0; i < fasterGainSteps; i++) {
+				ReservoirLevelReader.reservoirLevel -= 10;
+				ChangeParameter.getRefluxWaterRate -= 1;
+				Tick.simulateTick();
+			}
+			Tick.simulateTick();
+		} else {
+			for (int i = 0; i < fasterGainSteps; i++) {
+				ReservoirLevelReader.reservoirLevel += 10;
+				ChangeParameter.getRefluxWaterRate += 1;
+				Tick.simulateTick();
+			}
+			Tick.simulateTick();
 		}
 		
-		if (goalLevel <= 0) {
-			goalLevel = 1;
-		}
+		int goalLevel = ReservoirLevelReader.reservoirLevel;
+		ReservoirLevelReader.reservoirLevel = currentLevel;
+		ChangeParameter.reservoirSublimationRate = sublimationParts * 10;
+		ChangeParameter.getRefluxWaterRate = fasterGain * 10;
 		
-		returner[0] = sublimation;
-		returner[1] = fasterReflux;
-		returner[2] = currentLevel;
-		returner[3] = goalLevel;
-		
-		return returner;
+		return goalLevel;
+	}
+	
+	private static void initiateAllValues() {
+		TemperatureReader.temperature = ThreadLocalRandom.current().nextInt(30,50);
+		FlowRateReader.flowRate = ThreadLocalRandom.current().nextInt(1000,11000);
+		RefluxTemperatureReader.temperature = ThreadLocalRandom.current().nextInt(85,240);
+		ReservoirLevelReader.reservoirLevel = ThreadLocalRandom.current().nextInt(45,100);
+		Tick.simulateFirstTick();
 	}
 	
 }

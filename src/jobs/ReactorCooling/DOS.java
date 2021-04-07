@@ -209,7 +209,7 @@ public class DOS {
 			
 			if (currentIndex == -1) {
 				System.out.println("Ein Fehler ist aufgetreten!");
-				System.out.println("Du wurdest in C:\\Pump zurück gesetzt.");
+				System.out.println("Du wurdest in D:\\Pump zurück gesetzt.");
 				currentIntLocation = 0;
 				errorOccured = true;
 				return;
@@ -230,7 +230,7 @@ public class DOS {
 			
 			if (currentIndex == -1) {
 				System.out.println("Ein Fehler ist aufgetreten!");
-				System.out.println("Du wurdest in C:\\Pump zurück gesetzt.");
+				System.out.println("Du wurdest in D:\\Pump zurück gesetzt.");
 				errorOccured = true;
 				currentIntLocation = 0;
 				return;
@@ -246,7 +246,7 @@ public class DOS {
 			
 			if (gotoIndex == -1) {
 				System.out.println("Ein Fehler ist aufgetreten!");
-				System.out.println("Du wurdest in C:\\Pump zurück gesetzt.");
+				System.out.println("Du wurdest in D:\\Pump zurück gesetzt.");
 				errorOccured = true;
 				currentIntLocation = 0;
 				return;

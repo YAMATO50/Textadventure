@@ -1,6 +1,7 @@
 package places.visitable;
 
 import adventure.text.*;
+import jobs.Reactor.Reactor;
 import jobs.ReactorCooling.ReactorCooling;
 
 public class JobCenter {
@@ -33,7 +34,7 @@ public class JobCenter {
 		}
 		
 		int[] availableJobs = new int[6];
-		availableJobs[5] = 0;
+		availableJobs[5] = 1;
 		
 		for (int i = 0; i < 5; i++) {
 			availableJobs[i] = TextAdventure.random(0, 10);
@@ -48,7 +49,7 @@ public class JobCenter {
 		for (int i = 0; i < availableJobs.length; i++) {
 			System.out.println("[" + (i + 1) + "] " + jobList(availableJobs[i]) + ", Lohn: " + TextTools.adjustPriceOutput(wageList(availableJobs[i]) / 100));
 		}
-		System.out.println("[6] Reaktorkühlung (Funktioniert)");
+		System.out.println("[6] Reaktor (Funktioniert)");
 		System.out.println();
 		int jobNum;
 		
@@ -116,7 +117,6 @@ public class JobCenter {
 			jobName = "Verkaufe getränke an der Bar";
 			break;
 		default:
-			//Ich sehe eigentlich keinen grund warum das passieren sollte
 			jobName = "Der Job dessen name nicht genannt werden darf!";
 		}
 		return jobName;
@@ -160,7 +160,6 @@ public class JobCenter {
 			wage = 514;
 			break;
 		default:
-			//Ich sehe immernoch keinen grund warum das passieren sollte
 			wage = 404;
 		}
 		return wage;
@@ -176,6 +175,7 @@ public class JobCenter {
 			break;
 		case 1:
 			//Reaktor prüfen
+			Reactor.start();
 			break;
 		case 2:
 			//Waren von der Erde Entladen
@@ -205,7 +205,6 @@ public class JobCenter {
 			//Verkaufe getränke an der Bar
 			break;
 		default:
-			//;D
 			System.out.println("Du stehst in der mitte der hauptkuppel");
 			TextAdventure.wait(1000);
 			System.out.println("Plötzlich kommt ein Nasenloser mann auf dich zu");
