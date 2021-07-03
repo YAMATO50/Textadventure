@@ -1,6 +1,7 @@
 package places.visitable;
 
 import adventure.text.*;
+import jobs.Reactor.Reactor;
 import jobs.ReactorCooling.ReactorCooling;
 
 public class JobCenter {
@@ -32,8 +33,9 @@ public class JobCenter {
 			return;
 		}
 		
-		int[] availableJobs = new int[6];
-		availableJobs[5] = 0;
+		int[] availableJobs = new int[7];
+		availableJobs[5] = 1;
+		availableJobs[6] = 0;
 		
 		for (int i = 0; i < 5; i++) {
 			availableJobs[i] = TextAdventure.random(0, 10);
@@ -48,13 +50,12 @@ public class JobCenter {
 		for (int i = 0; i < availableJobs.length; i++) {
 			System.out.println("[" + (i + 1) + "] " + jobList(availableJobs[i]) + ", Lohn: " + TextTools.adjustPriceOutput(wageList(availableJobs[i]) / 100));
 		}
-		System.out.println("[6] Reaktorkühlung (Funktioniert)");
 		System.out.println();
 		int jobNum;
 		
 		do {
 			jobNum = TextAdventure.getIntFromUser();
-			if (jobNum > 6 || jobNum < 0 && jobNum != -1) {
+			if (jobNum > 7 || jobNum < 0 && jobNum != -1) {
 
 				System.out.println("Dieser Job existiert nicht!");
 				jobNum = -1;
@@ -62,6 +63,10 @@ public class JobCenter {
 		} while (jobNum == -1);
 		
 		jobNum--;
+		
+		if (-1 == jobNum) {
+			return;
+		}
 		
 		boolean succes = job(availableJobs[jobNum]);
 		if (succes) {
@@ -83,10 +88,10 @@ public class JobCenter {
 		
 		switch (jobNum) {
 		case 0:
-			jobName = "Reaktor kühlung prüfen";
+			jobName = "Reaktor kühlung prüfen (funktionier)";
 			break;
 		case 1:
-			jobName = "Reaktor prüfen";
+			jobName = "Reaktor prüfen (funktionier)";
 			break;
 		case 2:
 			jobName = "Waren von der Erde Entladen";
@@ -116,7 +121,6 @@ public class JobCenter {
 			jobName = "Verkaufe getränke an der Bar";
 			break;
 		default:
-			//Ich sehe eigentlich keinen grund warum das passieren sollte
 			jobName = "Der Job dessen name nicht genannt werden darf!";
 		}
 		return jobName;
@@ -160,7 +164,6 @@ public class JobCenter {
 			wage = 514;
 			break;
 		default:
-			//Ich sehe immernoch keinen grund warum das passieren sollte
 			wage = 404;
 		}
 		return wage;
@@ -176,6 +179,7 @@ public class JobCenter {
 			break;
 		case 1:
 			//Reaktor prüfen
+			Reactor.start();
 			break;
 		case 2:
 			//Waren von der Erde Entladen
@@ -205,7 +209,6 @@ public class JobCenter {
 			//Verkaufe getränke an der Bar
 			break;
 		default:
-			//;D
 			System.out.println("Du stehst in der mitte der hauptkuppel");
 			TextAdventure.wait(1000);
 			System.out.println("Plötzlich kommt ein Nasenloser mann auf dich zu");

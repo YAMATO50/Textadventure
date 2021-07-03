@@ -1,12 +1,12 @@
-package jobs.ReactorCooling;
+package jobs.Reactor;
 
 import adventure.text.Config;
 import adventure.text.TextAdventure;
 import adventure.text.TextTools;
 
-public class ReactorCooling {
+public class Reactor {
 
-	private static boolean succes;
+private static boolean succes;
 	
 	public static boolean start() {
 		
@@ -25,7 +25,7 @@ public class ReactorCooling {
 		TextAdventure.wait(1000);
 		TextTools.slowTextln("Hi, " + Config.save.playerName + " Herzlich Willkommen in der Reaktorkuppel!", 30);
 		TextTools.slowTextln("Ich bin Tobias Ingram, der Leiter der Reaktorkuppel.", 30);
-		TextTools.slowTextln("Du bist also hier um die Reaktorkühlung zu prüfen. Hast du das schonmal gemacht?", 30);
+		TextTools.slowTextln("Du bist also hier um den Reaktor zu prüfen. Hast du das schonmal gemacht?", 30);
 		System.out.println();
 		
 		System.out.println("[1] Ja");
@@ -47,15 +47,17 @@ public class ReactorCooling {
 			TextTools.slowTextln("Na dann leg los! Du weißt ja wie es geht.", 30);
 		} else {
 			TextTools.slowTextln("Okay, dann erkläre ich dir mal alles!"
-					+ "\n" + "Dort drüben an dem Rechner kommen alle Informationen der Kühlanlage an"
-					+ "\n" + "Du musst schauen dass die werte für Kühlwassertemparatur, Kühlwasserdurchfluss, Rückwassertemperatur und"
-					+ "\n" + "Reservoirfüllstand im grünen bereich sind. Die werte dazu findest du in der \"werte.txt\" auf dem Computer."
+					+ "\n" + "Dort drüben an dem Rechner kommen alle Informationen den Reaktor an"
+					+ "\n" + "Du musst schauen dass die Reaktorleistung mit dem Verbrauch der Basis übereinstimmt. Diese kannst du mithilfe"
+					+ "\n" + "der Reaktortemperatur, Brennstabsanzahl und Kontrollstabstiefe beeinflussen. Achte darauf, dass die Reaktorleistung"
+					+ "\n" + "innerhalb der Toleranz ist. Die werte dazu findest du in der \"werte.txt\" auf dem Computer."
 					+ "\n" + "Du musst dich leider mit DOS rumschlagen, aber das packst du schon! In der \"help.txt\" steht wie das geht."
-					+ "\n" + "Aber noch ein kleiner tipp für dich. Gib in jedem ordnder (= Verzeichniss) \"dir\" ein, um zu sehen was in dem ordner ist."
-					+ "\n" + "Wenn einer der Werte ausserhalb der Toleranz liegt, musst du in einem Progamm speziell für die funktion die Parameter"
+					+ "\n" + "Aber noch ein kleiner tipp für dich. Gib in jedem ordner (= Verzeichniss) \"dir\" ein, um zu sehen was in dem ordner ist."
+					+ "\n" + "Wenn die Reaktorleistung ausserhalb der Toleranz liegt, musst du in den programmen die Parameter"
 					+ "\n" + "neu einstellen. Weitere informationen dazu findest du dann in den entsprechenden \"info.txt\" dateien zu den Programmen."
-					+ "\n" + "Wenn du fertig bist, und alle werte in ordnung sind, rufe die \"update.exe\" auf. Du kannst dann wieder zu mir kommen und dein Geld"
-					+ "\n" + "abholen. Aber denk drann! Wenn einer oder mehrere der Werte nicht passen, bekommst du kein Geld!"
+					+ "\n" + "Wenn du fertig bist, und alle werte in ordnung sind, rufe die \"update.exe\" auf. Du kannst dann wieder zu mir kommen und "
+					+ "\n" + "dein Geld abholen. Aber denk drann! Wenn die Reaktorleistung nicht mit dem Verbrauch der Basis übereinstimmt,"
+					+ "\n" + "bekommst du kein Geld!"
 					+ "\n" + "Falls dir etwas zu schnell war, schau einfach in die \"help.txt\"."
 					+ "\n" + "Also dann! Viel erfolg!", 30);
 		}
@@ -83,26 +85,9 @@ public class ReactorCooling {
 			System.out.println();
 			System.out.println("Was möchtest du tun?");
 			System.out.println("[1] Gehen");
-			System.out.println("[2] \"Kann ich Sie noch etwas fagen?\"");
 			System.out.println();
 			
-			int choice;
-			
-			do {
-				choice = TextAdventure.getIntFromUser();
-				
-				switch (choice) {
-				case 1:
-					break;
-				case 2:
-					questionSection();
-					break;
-				default:
-					System.out.println("Bitte gib eine gültige zahl ein!");
-					choice = -1;
-				}
-				
-			} while (choice == -1);
+			TextAdventure.getIntFromUser();
 			
 		} else {
 			System.out.println("Du stehst auf und gehst zu Tobias Ingram.");
@@ -152,57 +137,6 @@ public class ReactorCooling {
 		
 		System.out.println("Du gehst wieder zurück in die Hauptkuppel");
 		TextAdventure.wait(1000);
-	}
-	
-	private static void questionSection() {
-		TextTools.slowTextln("Natürlich! Schieß los!");
-		
-		boolean stay = true;
-		while (stay) {
-			System.out.println();
-			System.out.println("[1] Warum kann der Wasserstand im Reservoir über 100% gehen?");
-			System.out.println("[2] Warum kann die Kühlwassertemperatur zu niedrig sein?");
-			System.out.println("[3] Ich habe keine Fragen mehr");
-			System.out.println();
-			
-			int choice;
-			
-			do {
-				choice = TextAdventure.getIntFromUser();
-				
-				switch (choice) {
-				case 1:
-				case 2:
-				case 3:
-					break;
-				default:
-					choice = -1;
-					System.out.println("Bitte gib eine gültige zahl ein!");
-				}
-				
-			} while (choice == -1);
-			
-			switch (choice) {
-			case 1:
-				TextTools.slowTextln("Wir Teilen uns das Reservoir auch mit anderen bereichen die kühlwasser brauchen. Wenn unser teil, also"
-						+ "\n" + "die 100%, voll ist, dann geben wir das an die anderen bereiche Kühlwasser ab. Bei 120% würden wir also die 20%"
-						+ "\n" + "an die anderen bereiche abgeben."
-						,30);
-				break;
-			case 2:
-				TextTools.slowTextln("Den Reaktor muss man sehr vorsichtig behandeln. Wenn man zu stark kühlt, und die Plasmatemperatur"
-						+ "\n" + "zu niedrig sinkt, wird die Fusion instabil, und könnte abbrechen. Dann wär die ganze Basis ohne Strom."
-						+ "\n" + "Ausserdem wäre das neu starten des Reaktors sehr Energieaufwändig. Es würde Monate dauern, bis die Basis"
-						+ "\n" + "wieder normal funkionieren könnte. Zum glück sind die wichtigsten lebenserhaltenden Systeme Auch Solar,"
-						+ "\n" + "Batterie und Dieselbetrieben."
-						, 30);
-				break;
-			case 3:
-				TextTools.slowTextln("Alles klar. Einen schönen tag noch!", 30);
-				stay = false;
-			}
-			
-		}
 	}
 	
 }

@@ -125,7 +125,7 @@ public class ChangeParameter {
 				System.out.println("Deine zahl ist zu klein!");
 			} else {
 				solarRate = solarRate + (choice * 5);
-				TemperatureReader.temperature = TemperatureReader.temperature + choice * 2;
+				TemperatureReader.temperature = TemperatureReader.temperature + choice * 4;
 			}
 		} else if (choice == 2) {
 			System.out.println();
@@ -142,7 +142,7 @@ public class ChangeParameter {
 				System.out.println("Deine zahl ist zu klein!");
 			} else {
 				solarRate = solarRate + (choice * 5);
-				TemperatureReader.temperature = TemperatureReader.temperature - choice * 2;
+				TemperatureReader.temperature = TemperatureReader.temperature - choice * 4;
 			}
 		} else {
 			System.out.println("Bitte gib eine gültige Zahl ein!");

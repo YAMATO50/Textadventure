@@ -1,4 +1,4 @@
-package jobs.ReactorCooling;
+package jobs.Reactor;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -80,17 +80,14 @@ public class DOS {
 						case 4:
 							Updater.update();
 							break;
+						case 7:
+							ChangeParameter.fuelRods();
+							break;
 						case 9:
-							ChangeParameter.flowRate();
+							ChangeParameter.controllRods();
 							break;
-						case 12:
+						case 11:
 							ChangeParameter.temperature();
-							break;
-						case 15:
-							ChangeParameter.reservoirLevel();
-							break;
-						case 19:
-							ChangeParameter.refluxTemperature();
 							break;
 						}
 					}
@@ -209,7 +206,7 @@ public class DOS {
 			
 			if (currentIndex == -1) {
 				System.out.println("Ein Fehler ist aufgetreten!");
-				System.out.println("Du wurdest in D:\\Pump zurück gesetzt.");
+				System.out.println("Du wurdest in D:\\Reactor zurück gesetzt.");
 				currentIntLocation = 0;
 				errorOccured = true;
 				return;
@@ -230,7 +227,7 @@ public class DOS {
 			
 			if (currentIndex == -1) {
 				System.out.println("Ein Fehler ist aufgetreten!");
-				System.out.println("Du wurdest in D:\\Pump zurück gesetzt.");
+				System.out.println("Du wurdest in D:\\Reactor zurück gesetzt.");
 				errorOccured = true;
 				currentIntLocation = 0;
 				return;
@@ -246,7 +243,7 @@ public class DOS {
 			
 			if (gotoIndex == -1) {
 				System.out.println("Ein Fehler ist aufgetreten!");
-				System.out.println("Du wurdest in D:\\Pump zurück gesetzt.");
+				System.out.println("Du wurdest in D:\\Reactor zurück gesetzt.");
 				errorOccured = true;
 				currentIntLocation = 0;
 				return;
