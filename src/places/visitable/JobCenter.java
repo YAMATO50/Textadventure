@@ -33,8 +33,9 @@ public class JobCenter {
 			return;
 		}
 		
-		int[] availableJobs = new int[6];
+		int[] availableJobs = new int[7];
 		availableJobs[5] = 1;
+		availableJobs[6] = 0;
 		
 		for (int i = 0; i < 5; i++) {
 			availableJobs[i] = TextAdventure.random(0, 10);
@@ -49,13 +50,12 @@ public class JobCenter {
 		for (int i = 0; i < availableJobs.length; i++) {
 			System.out.println("[" + (i + 1) + "] " + jobList(availableJobs[i]) + ", Lohn: " + TextTools.adjustPriceOutput(wageList(availableJobs[i]) / 100));
 		}
-		System.out.println("[6] Reaktor (Funktioniert)");
 		System.out.println();
 		int jobNum;
 		
 		do {
 			jobNum = TextAdventure.getIntFromUser();
-			if (jobNum > 6 || jobNum < 0 && jobNum != -1) {
+			if (jobNum > 7 || jobNum < 0 && jobNum != -1) {
 
 				System.out.println("Dieser Job existiert nicht!");
 				jobNum = -1;
@@ -63,6 +63,10 @@ public class JobCenter {
 		} while (jobNum == -1);
 		
 		jobNum--;
+		
+		if (-1 == jobNum) {
+			return;
+		}
 		
 		boolean succes = job(availableJobs[jobNum]);
 		if (succes) {
@@ -84,10 +88,10 @@ public class JobCenter {
 		
 		switch (jobNum) {
 		case 0:
-			jobName = "Reaktor kühlung prüfen";
+			jobName = "Reaktor kühlung prüfen (funktionier)";
 			break;
 		case 1:
-			jobName = "Reaktor prüfen";
+			jobName = "Reaktor prüfen (funktionier)";
 			break;
 		case 2:
 			jobName = "Waren von der Erde Entladen";

@@ -2,53 +2,86 @@ package jobs.Reactor;
 
 public class Tick {
 
-	static int lastFlowRate;
-	static int flowRateChange;
+	static int lastFuelRodAmount;
+	static int fuelRodAmountChange;
+	
+	static int lastControllRodDepth;
+	static int controllRodDepthChange;
 	
 	static int lastTemperature;
 	static int temperatureChange;
 	
-	static int lastRefluxTemperature;
-	static int refluxTemperatureChange;
-	
-	static int lastReservoirLevel;
-	static int reservoirLevelChange;
-	
 	public static void firstTick() {
-		lastFlowRate = FlowRateReader.flowRate;
-		lastReservoirLevel = ReservoirLevelReader.reservoirLevel;
+		lastFuelRodAmount = FuelRodReader.fuelRodAmount;
+		lastControllRodDepth = ControllRodDepthReader.controllRodDepth;
 		lastTemperature = TemperatureReader.temperature;
-		lastRefluxTemperature = RefluxTemperatureReader.temperature;
 	}
 	
 	public static void tick() {
 		
-		flowRateChange = flowRateChange + (lastFlowRate - FlowRateReader.flowRate);
-		reservoirLevelChange = reservoirLevelChange + (lastReservoirLevel - ReservoirLevelReader.reservoirLevel);
-		temperatureChange = temperatureChange + (lastTemperature - TemperatureReader.temperature);
-		refluxTemperatureChange = refluxTemperatureChange + (lastRefluxTemperature - RefluxTemperatureReader.temperature);
+		fuelRodAmountChange = fuelRodAmountChange + (FuelRodReader.fuelRodAmount - lastFuelRodAmount);
+		controllRodDepthChange = controllRodDepthChange + (ControllRodDepthReader.controllRodDepth - lastControllRodDepth);
 
-		int change = flowRateChange / 1000;
-		ReservoirLevelReader.reservoirLevel = ReservoirLevelReader.reservoirLevel + (1 * change);
-		RefluxTemperatureReader.temperature = RefluxTemperatureReader.temperature + (10 * change);
-		flowRateChange = flowRateChange - (change * 1000);
+		int change = fuelRodAmountChange;
+		fuelRodAmountChange = fuelRodAmountChange - change;
+		TemperatureReader.temperature = TemperatureReader.temperature + (10 * change);
+		PowerReader.power = PowerReader.power + (100 * change);
 
-		change = temperatureChange / 5;
-		RefluxTemperatureReader.temperature = RefluxTemperatureReader.temperature - (2 * change);
-		temperatureChange = temperatureChange - (change * 5);
+		change = controllRodDepthChange / 5;
+		TemperatureReader.temperature = TemperatureReader.temperature - (3 * change);
+		PowerReader.power = PowerReader.power - (10 * controllRodDepthChange);
+		controllRodDepthChange = controllRodDepthChange - (change * 5);
 		
-		change = refluxTemperatureChange / 10;
-		TemperatureReader.temperature = TemperatureReader.temperature - (2 * change);
-		refluxTemperatureChange = refluxTemperatureChange - (10 * change);
+		temperatureChange = temperatureChange + (TemperatureReader.temperature - lastTemperature);
 		
-		change = reservoirLevelChange / 10;
-		TemperatureReader.temperature = TemperatureReader.temperature + (1 * change);
-		reservoirLevelChange = reservoirLevelChange - (10 * change);
+		change = temperatureChange;
+		PowerReader.power = PowerReader.power - change;
+		temperatureChange = temperatureChange - change;
 		
-		lastFlowRate = FlowRateReader.flowRate;
-		lastReservoirLevel = ReservoirLevelReader.reservoirLevel;
+		lastFuelRodAmount = FuelRodReader.fuelRodAmount;
+		lastControllRodDepth = ControllRodDepthReader.controllRodDepth;
 		lastTemperature = TemperatureReader.temperature;
-		lastRefluxTemperature = RefluxTemperatureReader.temperature;
 	}
 	
+	static int simulatedLastFuelRodAmount;
+	static int simulatedFuelRodAmountChange;
+	
+	static int simulatedLastControllRodDepth;
+	static int simulatedControllRodDepthChange;
+	
+	static int simulatedLastTemperature;
+	static int simulatedTemperatureChange;
+	
+	public static void simulatedFirstTick() {
+		simulatedLastFuelRodAmount = FuelRodReader.fuelRodAmount;
+		simulatedLastControllRodDepth = ControllRodDepthReader.controllRodDepth;
+		simulatedLastTemperature = TemperatureReader.temperature;
+	}
+	
+	public static void simulatedTick() {
+		
+		simulatedFuelRodAmountChange = simulatedFuelRodAmountChange + (FuelRodReader.fuelRodAmount - simulatedLastFuelRodAmount);
+		simulatedControllRodDepthChange = simulatedControllRodDepthChange + (ControllRodDepthReader.controllRodDepth - simulatedLastControllRodDepth);
+		
+
+		int change = simulatedFuelRodAmountChange;
+		simulatedFuelRodAmountChange = simulatedFuelRodAmountChange - change;
+		TemperatureReader.temperature = TemperatureReader.temperature + (10 * change);
+		PowerReader.power = PowerReader.power + (100 * change);
+
+		change = simulatedControllRodDepthChange / 5;
+		TemperatureReader.temperature = TemperatureReader.temperature - (3 * change);
+		PowerReader.power = PowerReader.power - (10 * simulatedControllRodDepthChange);
+		simulatedControllRodDepthChange = simulatedControllRodDepthChange - (change * 5);
+		
+		simulatedTemperatureChange = simulatedTemperatureChange + (TemperatureReader.temperature - simulatedLastTemperature);
+		
+		change = simulatedTemperatureChange;
+		PowerReader.power = PowerReader.power - change;
+		simulatedTemperatureChange = simulatedTemperatureChange - change;
+		
+		simulatedLastFuelRodAmount = FuelRodReader.fuelRodAmount;
+		simulatedLastControllRodDepth = ControllRodDepthReader.controllRodDepth;
+		simulatedLastTemperature = TemperatureReader.temperature;
+	}
 }

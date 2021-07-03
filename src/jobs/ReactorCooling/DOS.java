@@ -266,7 +266,7 @@ public class DOS {
 		for (int i = 1; i < out.length; i++) {
 			System.out.print(out[i] + " ");
 		}
-		System.out.print("\n"); //warum so und nicht mit println? Weils spaß macht!
+		System.out.print("\n");
 	}
 	
 	private static boolean validDir(String dirName) {

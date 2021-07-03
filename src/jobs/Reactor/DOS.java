@@ -81,13 +81,13 @@ public class DOS {
 							Updater.update();
 							break;
 						case 7:
-							ChangeParameter.flowRate();
+							ChangeParameter.fuelRods();
 							break;
 						case 9:
-							ChangeParameter.temperature();
+							ChangeParameter.controllRods();
 							break;
 						case 11:
-							ChangeParameter.reservoirLevel();
+							ChangeParameter.temperature();
 							break;
 						}
 					}
@@ -263,7 +263,7 @@ public class DOS {
 		for (int i = 1; i < out.length; i++) {
 			System.out.print(out[i] + " ");
 		}
-		System.out.print("\n"); //warum so und nicht mit println? Weils spaß macht!
+		System.out.print("\n");
 	}
 	
 	private static boolean validDir(String dirName) {

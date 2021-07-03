@@ -163,36 +163,38 @@ public class ContentFiller {
 	public static int targetRefluxTemperature;
 	public static int targetReservoirLevel;
 	
+	private static int temperature;
+	private static int flowRate;
+	private static int refluxTemperature;
+	private static int reservoirLevel;
+	
 	public static void setValues() {
 		
 		initiateAllValues();
 		
-		targetTemperature = temperatureSetter();
-		targetFlowRate = flowRateSetter();
-		targetRefluxTemperature = refluxTemperatureSetter();
-		targetReservoirLevel = reservoirLevelSetter();
+		temperatureSetter();
+		flowRateSetter();
+		refluxTemperatureSetter();
+		reservoirLevelSetter();
 		
 		for (int i = 0; i < DOS.dosElement.size(); i++) {
 			if (DOS.dosElement.get(i).location == 6) {
 				String[] content = DOS.dosElement.get(i).fileContent;
 				for (int j = 0; j < content.length; j++) {
 					
-					content[j] = content[j].replaceFirst("¢", String.valueOf(targetTemperature));
-					content[j] = content[j].replaceFirst("£", String.valueOf(targetFlowRate));
-					content[j] = content[j].replaceFirst("¤", String.valueOf(targetRefluxTemperature));
-					content[j] = content[j].replaceFirst("¥", String.valueOf(targetReservoirLevel));
+					content[j] = content[j].replaceFirst("¢", String.valueOf(TemperatureReader.temperature));
+					content[j] = content[j].replaceFirst("£", String.valueOf(FlowRateReader.flowRate));
+					content[j] = content[j].replaceFirst("¤", String.valueOf(RefluxTemperatureReader.temperature));
+					content[j] = content[j].replaceFirst("¥", String.valueOf(ReservoirLevelReader.reservoirLevel));
 				}
 				DOS.dosElement.get(i).fileContent = content;
 				break;
 			}
 		}
-		
+		resetValues();
 	}
 	
-	private static int temperatureSetter() {
-		
-		int currentTemp = TemperatureReader.temperature;
-		
+	private static void temperatureSetter() {
 		//Defining "0"
 		int cooling = ThreadLocalRandom.current().nextInt(2,9);
 		int heating = ThreadLocalRandom.current().nextInt(4,7);
@@ -241,15 +243,12 @@ public class ContentFiller {
 			Tick.simulateTick();
 		}
 		
-		int goalTemp = TemperatureReader.temperature;
-		TemperatureReader.temperature = currentTemp;
 		ChangeParameter.sublimationRate = cooling * 10;
 		ChangeParameter.solarRate = heating * 10;
-		return goalTemp;
 		
 	}
 	
-	private static int flowRateSetter() {
+	private static void flowRateSetter() {
 		int currentFlow = FlowRateReader.flowRate;
 		
 		//Defining "0"
@@ -277,17 +276,11 @@ public class ContentFiller {
 			Tick.simulateTick();
 		}
 		
-		int goalFlow = FlowRateReader.flowRate;
-		FlowRateReader.flowRate = currentFlow;
 		ChangeParameter.pumpPower = flowRate;
 		
-		return goalFlow;
 	}
 	
-	private static int refluxTemperatureSetter() {
-		
-		int currentTemp = RefluxTemperatureReader.temperature;
-		
+	private static void refluxTemperatureSetter() {
 		//Defining "0"
 		int cooling = ThreadLocalRandom.current().nextInt(2,9);
 		int heating = ThreadLocalRandom.current().nextInt(10,40);
@@ -335,19 +328,13 @@ public class ContentFiller {
 			Tick.simulateTick();
 		}
 		
-		int goalTemp = RefluxTemperatureReader.temperature;
-		RefluxTemperatureReader.temperature = currentTemp;
 		ChangeParameter.refluxSublimationRate = cooling * 10;
 		ChangeParameter.refluxHeatPower = heating * 10;
 		
-		return goalTemp;
 		
 	}
 
-	private static int reservoirLevelSetter() {
-		
-		int currentLevel = ReservoirLevelReader.reservoirLevel;
-		
+	private static void reservoirLevelSetter() {
 		//Defining "0"
 		int sublimationParts = ThreadLocalRandom.current().nextInt(2,9);
 		int fasterGain = ThreadLocalRandom.current().nextInt(2,9);
@@ -395,12 +382,9 @@ public class ContentFiller {
 			Tick.simulateTick();
 		}
 		
-		int goalLevel = ReservoirLevelReader.reservoirLevel;
-		ReservoirLevelReader.reservoirLevel = currentLevel;
 		ChangeParameter.reservoirSublimationRate = sublimationParts * 10;
 		ChangeParameter.getRefluxWaterRate = fasterGain * 10;
 		
-		return goalLevel;
 	}
 	
 	private static void initiateAllValues() {
@@ -409,6 +393,16 @@ public class ContentFiller {
 		RefluxTemperatureReader.temperature = ThreadLocalRandom.current().nextInt(85,240);
 		ReservoirLevelReader.reservoirLevel = ThreadLocalRandom.current().nextInt(45,100);
 		Tick.simulateFirstTick();
+		temperature = TemperatureReader.temperature;
+		flowRate = FlowRateReader.flowRate;
+		refluxTemperature = RefluxTemperatureReader.temperature;
+		reservoirLevel = ReservoirLevelReader.reservoirLevel;
 	}
 	
+	private static void resetValues() {
+		TemperatureReader.temperature = temperature;
+		FlowRateReader.flowRate = flowRate;
+		RefluxTemperatureReader.temperature = refluxTemperature;
+		ReservoirLevelReader.reservoirLevel = reservoirLevel;
+	}
 }

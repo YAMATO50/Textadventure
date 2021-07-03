@@ -6,529 +6,291 @@ import adventure.text.TextTools;
 
 public class ChangeParameter {
 
-	public static int sublimationRate;
-	public static int solarRate;
-	
-	public static void temperature() {
-		System.out.println();
-		System.out.print("Berechne");
-		TextTools.dddln();
+	public static void fuelRods() {
+		
 		boolean stay = true;
 		while (stay) {
 			showStates();
+			
 			System.out.println("Was mˆchtest du tun?");
-			System.out.println("[1] Durchflussanteil durch Sublimationsk¸hlung ‰ndern");
-			System.out.println("[2] Durchflussanteil durch Solarzellen ‰ndern");
-			System.out.println("[3] Exit");
+			System.out.println("[1] Anzahl der Brennst‰be im Reaktor ‰ndern");
+			System.out.println("[2] Exit");
 			System.out.println();
 			
-			int choice;
-			do {
-				choice = getUserInput();
-			} while (choice == -1);
+			int choice = getUserInput();
 			
 			switch (choice) {
 			case 1:
-				sublimation();
+				fuelRodControll();
 				break;
 			case 2:
-				solar();
-				break;
-			case 3:
 				stay = false;
 				break;
 			default:
-				System.out.println("Bitte gib eine G¸ltige zahl ein!");
+				System.out.println("Bitte gib eine g¸ltige Zahl ein!");
 			}
 			Tick.tick();
 		}
+		
 	}
 	
-	public static void sublimation() {
-		System.out.println("aktuell flieﬂen " + sublimationRate + "% des K¸hlwassers durch die Sublimationsk¸hlung");
+	private static void fuelRodControll() {
+		System.out.println("Aktuell befinden sich " + FuelRodReader.fuelRodAmount + " aktive Brennst‰be im Reaktor");
 		System.out.println();
-		System.out.println("Durchflussanteile durch die Sublimationsk¸hlung...");
+		System.out.println("Anzahl an aktiven Brennst‰ben im Reaktor...");
 		System.out.println("[1] Erhˆhen");
 		System.out.println("[2] Verringern");
 		System.out.println();
 		
-		int choice;
-		do {
+		int choice = getUserInput();
+		
+		switch (choice) {
+		case 1:
+			System.out.println();
+			System.out.println("Wieviele Brennst‰be mˆchtest du hinzuf¸gen?");
+			System.out.println("Verf¸gbare anzahl: " + (10 - FuelRodReader.fuelRodAmount));
+			System.out.println();
+			
 			choice = getUserInput();
-		} while (choice == -1);
-		
-		if (choice == 1) {
-			System.out.println();
-			System.out.println("Um wieviele 5% schritte mˆchtest du den Anteil erhˆhen?");
-			System.out.println("Verf¸gbare schritte: " + ((100 - sublimationRate) / 5));
-			
-			do {
-				choice = getUserInput();
-			} while (choice == -1);
-			
-			if (choice > (100 - sublimationRate) / 5) {
-				System.out.println("Deine zahl ist zu groﬂ!");
-			} else if (choice < 0) {
-				System.out.println("Deine zahl ist zu klein!");
-			} else {
-				sublimationRate = sublimationRate + (choice * 5);
-				TemperatureReader.temperature = TemperatureReader.temperature - choice;
+				
+			if (choice <= (10 - FuelRodReader.fuelRodAmount)) {
+				FuelRodReader.fuelRodAmount = FuelRodReader.fuelRodAmount + choice;
 			}
-			
-		} else if (choice == 2) {
-			System.out.println();
-			System.out.println("Um wieviele 5% schritte mˆchtest du den Anteil verringern?");
-			System.out.println("Verf¸gbare schritte: " + (sublimationRate / 5));
-			
-			do {
-				choice = getUserInput();
-			} while (choice == -1);
-			
-			if (choice > sublimationRate / 5) {
-				System.out.println("Deine zahl ist zu groﬂ!");
-			} else if (choice < 0) {
+				
+			if (choice < 0) {
 				System.out.println("Deine zahl ist zu klein!");
-			} else {
-				sublimationRate = sublimationRate - (choice * 5);
-				TemperatureReader.temperature = TemperatureReader.temperature + choice;
 			}
-		} else {
-			System.out.println("Bitte gib eine g¸ltige Zahl ein!");
-		}
-	}
-	
-	public static void solar() {
-		System.out.println("aktuell flieﬂen " + solarRate + "% des K¸hlwassers durch die Solarzellen");
-		System.out.println();
-		System.out.println("Durchflussanteile durch die Solarzellen...");
-		System.out.println("[1] Erhˆhen");
-		System.out.println("[2] Verringern");
-		System.out.println();
-		
-		int choice;
-		do {
+				
+			if (choice > (10 - FuelRodReader.fuelRodAmount)) {
+				System.out.println("Deine zahl ist zu groﬂ");
+			}
+				
+			break;
+		case 2:
+			System.out.println();
+			System.out.println("Wieviele Brennst‰be mˆchtest du entfernen?");
+			System.out.println("Verf¸gbare anzahl: " + (FuelRodReader.fuelRodAmount - 2));
+			System.out.println();
+			
 			choice = getUserInput();
-		} while (choice == -1);
-		
-		if (choice == 1) {
-			System.out.println();
-			System.out.println("Um wieviele 5% schritte mˆchtest du den Anteil erhˆhen?");
-			System.out.println("Verf¸gbare schritte: " + ((100 - solarRate) / 5));
-			
-			do {
-				choice = getUserInput();
-			} while (choice == -1);
-			
-			if (choice > (100 - solarRate) / 5) {
-				System.out.println("Deine zahl ist zu groﬂ!");
-			} else if (choice < 0) {
-				System.out.println("Deine zahl ist zu klein!");
-			} else {
-				solarRate = solarRate + (choice * 5);
-				TemperatureReader.temperature = TemperatureReader.temperature + choice * 2;
+				
+			if (choice <= (FuelRodReader.fuelRodAmount - 2)) {
+				FuelRodReader.fuelRodAmount = FuelRodReader.fuelRodAmount - choice;
 			}
-		} else if (choice == 2) {
-			System.out.println();
-			System.out.println("Um wieviele 5% schritte mˆchtest du den Anteil verringern?");
-			System.out.println("Verf¸gbare schritte: " +  solarRate / 5);
-			
-			do {
-				choice = getUserInput();
-			} while (choice == -1);
-			
-			if (choice > solarRate / 5) {
-				System.out.println("Deine zahl ist zu groﬂ!");
-			} else if (choice < 0) {
+				
+			if (choice < 0) {
 				System.out.println("Deine zahl ist zu klein!");
-			} else {
-				solarRate = solarRate + (choice * 5);
-				TemperatureReader.temperature = TemperatureReader.temperature - choice * 2;
 			}
-		} else {
+				
+			if (choice > (FuelRodReader.fuelRodAmount - 2)) {
+				System.out.println("Deine zahl ist zu groﬂ");
+			}
+			break;
+		default:
 			System.out.println("Bitte gib eine g¸ltige Zahl ein!");
 		}
 	}
 
-	public static int pumpPower;
-	
-	public static void flowRate() {
-		System.out.println();
-		System.out.print("Berechne");
-		TextTools.dddln();
+	public static void controllRods() {
+		
 		boolean stay = true;
 		while (stay) {
 			showStates();
+			
 			System.out.println("Was mˆchtest du tun?");
-			System.out.println("[1] Pumpleistung der K¸hlwasserpumpen ƒndern");
+			System.out.println("[1] Tiefe der Kontrollst‰be im Reaktor ‰ndern");
 			System.out.println("[2] Exit");
 			System.out.println();
 			
-			int choice;
-			do {
-				choice = getUserInput();
-			} while (choice == -1);
+			int choice = getUserInput();
 			
 			switch (choice) {
 			case 1:
-				System.out.println("Aktuelle Gesammtpumpleistung: " + pumpPower + " GW");
-				System.out.println();
-				System.out.println("Gesammtpumpleistung...");
-				System.out.println("[1] Erhˆhen");
-				System.out.println("[2] Verringern");
-				System.out.println();
-				
-				do {
-					choice = getUserInput();
-				} while (choice == -1);
-				
-				if (choice == 1) {
-					
-					System.out.println();
-					System.out.println("Um wieviele 10 GW schritte mˆchtest du die Leistung erhˆhen?");
-					System.out.println("Verf¸gbare schritte: " + (15000 - pumpPower) / 10);
-					
-					do {
-						choice = getUserInput();
-					} while (choice == -1);
-					
-					if (choice > (15000 - pumpPower) / 10) {
-						System.out.println("Deine zahl ist zu groﬂ!");
-					} else if (choice < 0) {
-						System.out.println("Deine zahl ist zu klein!");
-					} else {
-						pumpPower = pumpPower + choice * 10;
-						FlowRateReader.flowRate = FlowRateReader.flowRate + choice * 10;
-					}
-					
-				} else if (choice == 2) {
-					System.out.println();
-					System.out.println("Um wieviele 10 GW schritte mˆchtest du die Leistung verringern?");
-					System.out.println("Verf¸gbare schritte: " + pumpPower / 10);
-					
-					do {
-						choice = getUserInput();
-					} while (choice == -1);
-					
-					if (choice > pumpPower / 10) {
-						System.out.println("Deine zahl ist zu groﬂ!");
-					} else if (choice < 0) {
-						System.out.println("Deine zahl ist zu klein!");
-					} else {
-						pumpPower = pumpPower - choice * 10;
-						FlowRateReader.flowRate = FlowRateReader.flowRate - choice * 10;
-					}
-				} else {
-					System.out.println("Bitte gib eine G¸ltige zahl ein!");
-				}
-				
+				controllRodControll();
 				break;
 			case 2:
 				stay = false;
 				break;
 			default:
-				System.out.println("Bitte gib eine G¸ltige zahl ein!");
+				System.out.println("Bitte gib eine g¸ltige Zahl ein!");
 			}
 			Tick.tick();
 		}
+		
 	}
 	
-	public static int reservoirSublimationRate;
-	public static int getRefluxWaterRate;
-	
-	public static void reservoirLevel() {
+	private static void controllRodControll() {
+		System.out.println("Aktuell sind die Kontrollst‰be zu " + ControllRodDepthReader.controllRodDepth + "% in den Reaktor gefahren");
 		System.out.println();
-		System.out.print("Berechne");
-		TextTools.dddln();
-		boolean stay = true;
-		while (stay) {
-			showStates();
-			System.out.println("Was mˆchtest du tun?");
-			System.out.println("[1] Abgabe des Wassers an die Sublimationsk¸hlung ‰ndern");
-			System.out.println("[2] R¸ckgewinngungsgeschwindigkeit des R¸ckwassers ‰ndern");
-			System.out.println("[3] Exit");
+		System.out.println("Kontrollst‰be...");
+		System.out.println("[1] Herausziehen");
+		System.out.println("[2] Hereinfahren");
+		System.out.println();
+		
+		int choice = getUserInput();
+		
+		switch (choice) {
+		case 1:
+			System.out.println();
+			System.out.println("Um wieviel 1% Schritte mˆchtest du die Kontrollst‰be herausziehen?");
+			System.out.println("Verf¸gbare anzahl: " + ControllRodDepthReader.controllRodDepth);
 			System.out.println();
 			
-			int choice;
-			do {
-				choice = getUserInput();
-			} while (choice == -1);
-			
-			switch (choice) {
-			case 1:
-				System.out.println("Aktuelle werden " + reservoirSublimationRate + "% an die Sublimationsk¸hlung abgegeben");
-				System.out.println();
-				System.out.println("Abgabe an die Sublimationsk¸hlung...");
-				System.out.println("[1] Erhˆhen");
-				System.out.println("[2] Verringern");
-				System.out.println();
+			choice = getUserInput();
 				
-				do {
-					choice = getUserInput();
-				} while (choice == -1);
-				
-				if (choice == 1) {
-					
-					System.out.println();
-					System.out.println("Um wieviele 5% schritte mˆchtest du den Anteil erhˆhen?");
-					System.out.println("Verf¸gbare schritte: " + (100 - reservoirSublimationRate) / 5);
-					
-					do {
-						choice = getUserInput();
-					} while (choice == -1);
-					
-					if (choice > (100 - reservoirSublimationRate) / 5) {
-						System.out.println("Deine zahl ist zu groﬂ!");
-					} else if (choice < 0) {
-						System.out.println("Deine zahl ist zu klein!");
-					} else {
-						reservoirSublimationRate = reservoirSublimationRate + choice * 5;
-						ReservoirLevelReader.reservoirLevel = ReservoirLevelReader.reservoirLevel - choice * 5;
-					}
-					
-				} else if (choice == 2) {
-					System.out.println();
-					System.out.println("Um wieviele 5% schritte mˆchtest du den Anteil verringern?");
-					System.out.println("Verf¸gbare schritte: " + reservoirSublimationRate / 5);
-					
-					do {
-						choice = getUserInput();
-					} while (choice == -1);
-					
-					if (choice > reservoirSublimationRate / 5) {
-						System.out.println("Deine zahl ist zu groﬂ!");
-					} else if (choice < 0) {
-						System.out.println("Deine zahl ist zu klein!");
-					} else {
-						reservoirSublimationRate = reservoirSublimationRate - choice * 5;
-						ReservoirLevelReader.reservoirLevel = ReservoirLevelReader.reservoirLevel + choice * 5;
-					}
-				} else {
-					System.out.println("Bitte gib eine G¸ltige zahl ein!");
-				}
-				
-				break;
-			case 2:
-				System.out.println("Aktuelle r¸ckgewinnungs geschwindigkeit: " + getRefluxWaterRate + "%");
-				System.out.println();
-				System.out.println("R¸ckgewinnungsgeschwindigkeit...");
-				System.out.println("[1] Erhˆhen");
-				System.out.println("[2] Verringern");
-				System.out.println();
-				
-				do {
-					choice = getUserInput();
-				} while (choice == -1);
-				
-				if (choice == 1) {
-					
-					System.out.println();
-					System.out.println("Um wieviele 5% schritte mˆchtest du die R¸ckgewinnungsgeschwindigkeit erhˆhen?");
-					System.out.println("Verf¸gbare schritte: " + (200 - getRefluxWaterRate) / 5);
-					
-					do {
-						choice = getUserInput();
-					} while (choice == -1);
-					
-					if (choice > (200 - getRefluxWaterRate) / 10) {
-						System.out.println("Deine zahl ist zu groﬂ!");
-					} else if (choice < 0) {
-						System.out.println("Deine zahl ist zu klein!");
-					} else {
-						getRefluxWaterRate = getRefluxWaterRate + choice * 5;
-						ReservoirLevelReader.reservoirLevel = ReservoirLevelReader.reservoirLevel + choice * 5;
-					}
-					
-				} else if (choice == 2) {
-					System.out.println();
-					System.out.println("Um wieviele 5% schritte mˆchtest du die R¸ckgewinnungsgeschwindigkeit verringern?");
-					System.out.println("Verf¸gbare schritte: " + getRefluxWaterRate / 5);
-					
-					do {
-						choice = getUserInput();
-					} while (choice == -1);
-					
-					if (choice > getRefluxWaterRate / 5) {
-						System.out.println("Deine zahl ist zu groﬂ!");
-					} else if (choice < 0) {
-						System.out.println("Deine zahl ist zu klein!");
-					} else {
-						getRefluxWaterRate = getRefluxWaterRate - choice * 5;
-						ReservoirLevelReader.reservoirLevel = ReservoirLevelReader.reservoirLevel - choice * 5;
-					}
-				} else {
-					System.out.println("Bitte gib eine G¸ltige zahl ein!");
-				}
-				break;
-			case 3:
-				stay = false;
-				break;
-			default:
-				System.out.println("Bitte gib eine G¸ltige zahl ein!");
+			if (choice <= ControllRodDepthReader.controllRodDepth) {
+				ControllRodDepthReader.controllRodDepth = ControllRodDepthReader.controllRodDepth - choice;
 			}
-			Tick.tick();
+				
+			if (choice < 0) {
+				System.out.println("Deine zahl ist zu klein!");
+			}
+				
+			if (choice > ControllRodDepthReader.controllRodDepth) {
+				System.out.println("Deine zahl ist zu groﬂ");
+			}
+				
+			break;
+		case 2:
+			System.out.println();
+			System.out.println("Um wieviel 1% Schritte mˆchtest du die Kontrollst‰be hereinfahren?");
+			System.out.println("Verf¸gbare anzahl: " + (100 - ControllRodDepthReader.controllRodDepth));
+			System.out.println();
+			
+			choice = getUserInput();
+				
+			if (choice <= (100 - ControllRodDepthReader.controllRodDepth)) {
+				ControllRodDepthReader.controllRodDepth = ControllRodDepthReader.controllRodDepth + choice;
+			}
+				
+			if (choice < 0) {
+				System.out.println("Deine zahl ist zu klein!");
+			}
+				
+			if (choice > (100 - ControllRodDepthReader.controllRodDepth)) {
+				System.out.println("Deine zahl ist zu groﬂ");
+			}
+			break;
+		default:
+			System.out.println("Bitte gib eine g¸ltige Zahl ein!");
 		}
 	}
 	
-	public static int refluxSublimationRate;
-	public static int refluxHeatPower;
-	
-	public static void refluxTemperature() {
-		System.out.println();
-		System.out.print("Berechne");
-		TextTools.dddln();
+	public static void temperature() {
+		
 		boolean stay = true;
 		while (stay) {
 			showStates();
+			
 			System.out.println("Was mˆchtest du tun?");
-			System.out.println("[1] Durchflussanteil durch die Sublimationsk¸hlung ‰ndern");
-			System.out.println("[2] Heizleistung des R¸ckwassers in der Kuppel ‰ndern");
-			System.out.println("[3] Exit");
+			System.out.println("[1] Reaktorkerntemperatur ver‰ndern");
+			System.out.println("[2] Exit");
 			System.out.println();
 			
-			int choice;
-			do {
-				choice = getUserInput();
-			} while (choice == -1);
+			int choice = getUserInput();
 			
 			switch (choice) {
 			case 1:
-				System.out.println("Aktuelle flieﬂen " + refluxSublimationRate + "% des R¸ckwassers durch die Sublimationsk¸hlung");
-				System.out.println();
-				System.out.println("Durchflussanteil durch die Sublimationsk¸hlung...");
-				System.out.println("[1] Erhˆhen");
-				System.out.println("[2] Verringern");
-				System.out.println();
-				
-				do {
-					choice = getUserInput();
-				} while (choice == -1);
-				
-				if (choice == 1) {
-					
-					System.out.println();
-					System.out.println("Um wieviele 5% schritte mˆchtest du den Anteil erhˆhen?");
-					System.out.println("Verf¸gbare schritte: " + (100 - refluxSublimationRate) / 5);
-					
-					do {
-						choice = getUserInput();
-					} while (choice == -1);
-					
-					if (choice > (100 - refluxSublimationRate) / 5) {
-						System.out.println("Deine zahl ist zu groﬂ!");
-					} else if (choice < 0) {
-						System.out.println("Deine zahl ist zu klein!");
-					} else {
-						refluxSublimationRate = refluxSublimationRate + choice * 5;
-						RefluxTemperatureReader.temperature = RefluxTemperatureReader.temperature - choice * 5;
-					}
-					
-				} else if (choice == 2) {
-					System.out.println();
-					System.out.println("Um wieviele 5% schritte mˆchtest du den Anteil verringern?");
-					System.out.println("Verf¸gbare schritte: " + refluxSublimationRate / 5);
-					
-					do {
-						choice = getUserInput();
-					} while (choice == -1);
-					
-					if (choice > refluxSublimationRate / 5) {
-						System.out.println("Deine zahl ist zu groﬂ!");
-					} else if (choice < 0) {
-						System.out.println("Deine zahl ist zu klein!");
-					} else {
-						refluxSublimationRate = refluxSublimationRate - choice * 5;
-						RefluxTemperatureReader.temperature = RefluxTemperatureReader.temperature + choice * 5;
-					}
-				} else {
-					System.out.println("Bitte gib eine G¸ltige zahl ein!");
-				}
-				
+				temperatureControll();
 				break;
 			case 2:
-				System.out.println("Aktuelle Heizleistung des R¸ckwassers in der Kuppel: " + refluxHeatPower + " MW");
-				System.out.println();
-				System.out.println("Heizleistung des R¸ckwassers in der Kuppel...");
-				System.out.println("[1] Erhˆhen");
-				System.out.println("[2] Verringern");
-				System.out.println();
-				
-				do {
-					choice = getUserInput();
-				} while (choice == -1);
-				
-				if (choice == 1) {
-					
-					System.out.println();
-					System.out.println("Um wieviele 10 MW schritte mˆchtest du die Heizleistung erhˆhen?");
-					System.out.println("Verf¸gbare schritte: " + (500 - refluxHeatPower) / 10);
-					
-					do {
-						choice = getUserInput();
-					} while (choice == -1);
-					
-					if (choice > (500 - refluxHeatPower) / 10) {
-						System.out.println("Deine zahl ist zu groﬂ!");
-					} else if (choice < 0) {
-						System.out.println("Deine zahl ist zu klein!");
-					} else {
-						refluxHeatPower = refluxHeatPower + choice * 10;
-						RefluxTemperatureReader.temperature = RefluxTemperatureReader.temperature - choice * 5;
-					}
-					
-				} else if (choice == 2) {
-					System.out.println();
-					System.out.println("Um wieviele 10 MW schritte mˆchtest du die Heizleistung verringern?");
-					System.out.println("Verf¸gbare schritte: " + refluxHeatPower / 10);
-					
-					do {
-						choice = getUserInput();
-					} while (choice == -1);
-					
-					if (choice > refluxHeatPower / 10) {
-						System.out.println("Deine zahl ist zu groﬂ!");
-					} else if (choice < 0) {
-						System.out.println("Deine zahl ist zu klein!");
-					} else {
-						refluxHeatPower = refluxHeatPower - choice * 10;
-						RefluxTemperatureReader.temperature = RefluxTemperatureReader.temperature + choice * 5;
-					}
-				} else {
-					System.out.println("Bitte gib eine G¸ltige zahl ein!");
-				}
-				break;
-			case 3:
 				stay = false;
 				break;
 			default:
-				System.out.println("Bitte gib eine G¸ltige zahl ein!");
+				System.out.println("Bitte gib eine g¸ltige Zahl ein!");
 			}
 			Tick.tick();
+		}
+		
+	}
+	
+	private static void temperatureControll() {
+		System.out.println("Aktuelle Reaktorkerntemperatur " + TemperatureReader.temperature + " ∞C");
+		System.out.println();
+		System.out.println("Reaktorkerntemperatur...");
+		System.out.println("[1] Erhˆhen");
+		System.out.println("[2] Verringern");
+		System.out.println();
+		
+		int choice = getUserInput();
+		
+		switch (choice) {
+		case 1:
+			System.out.println();
+			System.out.println("Um wieviel ∞C mˆchtest du die Reaktorkerntemperatur erhˆhen?");
+			System.out.println("Verf¸gbare anzahl: " + (900 - TemperatureReader.temperature));
+			System.out.println();
+			
+			choice = getUserInput();
+				
+			if (choice <= (900 - TemperatureReader.temperature)) {
+				TemperatureReader.temperature = TemperatureReader.temperature + choice;
+			}
+				
+			if (choice < 0) {
+				System.out.println("Deine zahl ist zu klein!");
+			}
+				
+			if (choice > (900 - TemperatureReader.temperature)) {
+				System.out.println("Deine zahl ist zu groﬂ");
+			}
+				
+			break;
+		case 2:
+			System.out.println();
+			System.out.println("Um wieviel ∞C mˆchtest du die Reaktorkerntemperatur verringern?");
+			System.out.println("Verf¸gbare anzahl: " + (TemperatureReader.temperature - 200));
+			System.out.println();
+			
+			choice = getUserInput();
+				
+			if (choice <= (TemperatureReader.temperature - 200)) {
+				TemperatureReader.temperature = TemperatureReader.temperature - choice;
+			}
+				
+			if (choice < 0) {
+				System.out.println("Deine zahl ist zu klein!");
+			}
+				
+			if (choice > (TemperatureReader.temperature - 200)) {
+				System.out.println("Deine zahl ist zu groﬂ");
+			}
+			break;
+		default:
+			System.out.println("Bitte gib eine g¸ltige Zahl ein!");
 		}
 	}
 	
 	public static int getUserInput() {
 		int number = -1;
-		String input = Config.keyScan.nextLine();
-		try {
-			number = Integer.valueOf(input);
-		} catch (NumberFormatException e) {
-			System.out.println("\"" + input + "\" ist keine Zahl! Bitte gebe eine Zahl ein!");
-		}
+		
+			do {
+			String input = Config.keyScan.nextLine();
+			try {
+				number = Integer.valueOf(input);
+			} catch (NumberFormatException e) {
+				System.out.println("\"" + input + "\" ist keine Zahl! Bitte gebe eine Zahl ein!");
+			}
+		} while (number == -1);
+			
 		return number;
 	}
 	
 	private static void showStates() {
 		System.out.println();
+		System.out.print("Berechne");
+		TextTools.dddln();
+		System.out.println();
 		System.out.print("Aktuelle Werte:");
 		System.out.println();
 		TextAdventure.wait(100);
-		System.out.println("Durchfluss: " + FlowRateReader.flowRate + " L/s");
+		System.out.println("Brennstabsanzahl: " + FuelRodReader.fuelRodAmount);
 		TextAdventure.wait(100);
-		System.out.println("K¸hlwassertemperatur: " + TemperatureReader.temperature + " ∞C");
+		System.out.println("Kontrollstabstiefe: " + ControllRodDepthReader.controllRodDepth + "%");
 		TextAdventure.wait(100);
-		System.out.println("R¸ckflusswassertemperatur: " + RefluxTemperatureReader.temperature + " ∞C");
+		System.out.println("Reaktorkerntemperatur: " + TemperatureReader.temperature + " ∞C");
 		TextAdventure.wait(100);
-		System.out.println("Reservoirf¸llstand: " + ReservoirLevelReader.reservoirLevel + "%");
+		System.out.println("Reaktorleistung: " + PowerReader.power + " TW");
 		TextAdventure.wait(100);
 		System.out.println();
 	}
