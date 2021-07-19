@@ -88,5 +88,13 @@ public class FlowRate implements DOSProgrammInterface {
 			Tick.tick();
 		}
 	}
+	
+	public String[] getContents() {
+		return null;
+	}
+
+	public void setContents(String[] content) {
+		
+	}
 
 }

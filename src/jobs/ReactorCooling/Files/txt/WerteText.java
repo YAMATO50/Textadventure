@@ -34,4 +34,13 @@ public class WerteText implements DOSProgrammInterface {
 
 	}
 
+	public String[] getContents() {
+		return this.content;
+	}
+
+	@Override
+	public void setContents(String[] content) {
+		this.content = content;	
+	}
+
 }

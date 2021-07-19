@@ -30,4 +30,11 @@ public class FlowrateInfoText implements DOSProgrammInterface {
 		
 	}
 
+	public String[] getContents() {
+		return content;
+	}
+
+	public void setContents(String[] content) {
+		this.content = content;
+	}
 }

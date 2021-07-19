@@ -141,5 +141,13 @@ public class ReservoirLevel implements DOSProgrammInterface {
 			Tick.tick();
 		}
 	}
+	
+	public String[] getContents() {
+		return null;
+	}
 
+	public void setContents(String[] content) {
+		
+	}
+	
 }

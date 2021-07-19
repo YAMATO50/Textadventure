@@ -282,13 +282,6 @@ public class DOS {
 		return false;
 	}
 	
-	private static void printFileContent(String[] fileContent) {
-		System.out.println();
-		for (int i = 0; i < fileContent.length; i++) {
-			System.out.println(fileContent[i]);
-		}
-	}
-	
 	private static String thousandsSeparator(int number) {
 		char[] numbers = String.valueOf(number).toCharArray();
 		String result = "";

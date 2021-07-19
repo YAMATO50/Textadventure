@@ -149,4 +149,12 @@ public class Temperature implements DOSProgrammInterface {
 		}
 		
 	}
+	
+	public String[] getContents() {
+		return null;
+	}
+
+	public void setContents(String[] content) {
+		
+	}
 }
