@@ -6,6 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import jobs.ReactorCooling.Files.*;
 import jobs.ReactorCooling.Files.exe.*;
 import jobs.ReactorCooling.Files.txt.*;
+import jobs.ReactorCooling.Files.commands.*;
 
 public class ContentFiller {
 
@@ -300,5 +301,10 @@ public class ContentFiller {
 		DOS.programms.put("temperatureinfo.txt", new TemperatureInfoText());
 		DOS.programms.put("reservoirinfo.txt", new ReservoirInfoText());
 		DOS.programms.put("refluxinfo.txt", new RefluxInfoText());
+		
+		DOS.programms.put("cd", new Cd());
+		DOS.programms.put("dir", new Dir());
+		DOS.programms.put("echo", new Echo());
+		DOS.programms.put("help", new Help());
 	}
 }
