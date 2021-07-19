@@ -26,14 +26,12 @@ public class ContentFiller {
 		dosElement.add(new DosElement(15,2,2,"Reservoir.exe")); // reservoir
 		dosElement.add(new DosElement(19,18,2,"Rueckflusstemperatur.exe")); //temp rück
 		
-		String[] content = new String[] {""};
-		
-		dosElement.add(new DosElement(5,0,1,"help.txt",content));
-		dosElement.add(new DosElement(6,0,1,"werte.txt",content));
-		dosElement.add(new DosElement(11,7,1,"FlowrateInfo.txt",content));
-		dosElement.add(new DosElement(14,8,1,"TemperatureInfo.txt",content));
-		dosElement.add(new DosElement(17,2,1,"ReservoirInfo.txt",content));
-		dosElement.add(new DosElement(21,18,1,"RefluxInfo.txt",content));
+		dosElement.add(new DosElement(5,0,1,"help.txt"));
+		dosElement.add(new DosElement(6,0,1,"werte.txt"));
+		dosElement.add(new DosElement(11,7,1,"FlowrateInfo.txt"));
+		dosElement.add(new DosElement(14,8,1,"TemperatureInfo.txt"));
+		dosElement.add(new DosElement(17,2,1,"ReservoirInfo.txt"));
+		dosElement.add(new DosElement(21,18,1,"RefluxInfo.txt"));
 			
 		DOS.dosElement = dosElement;
 	}
@@ -57,20 +55,8 @@ public class ContentFiller {
 		refluxTemperatureSetter();
 		reservoirLevelSetter();
 		
-		for (int i = 0; i < DOS.dosElement.size(); i++) {
-			if (DOS.dosElement.get(i).location == 6) {
-				String[] content = DOS.dosElement.get(i).fileContent;
-				for (int j = 0; j < content.length; j++) {
-					
-					content[j] = content[j].replaceFirst("¢", String.valueOf(TemperatureReader.temperature));
-					content[j] = content[j].replaceFirst("£", String.valueOf(FlowRateReader.flowRate));
-					content[j] = content[j].replaceFirst("¤", String.valueOf(RefluxTemperatureReader.temperature));
-					content[j] = content[j].replaceFirst("¥", String.valueOf(ReservoirLevelReader.reservoirLevel));
-				}
-				DOS.dosElement.get(i).fileContent = content;
-				break;
-			}
-		}
+		fillValuesInTextFile();
+				
 		resetValues();
 	}
 	
@@ -277,6 +263,20 @@ public class ContentFiller {
 		flowRate = FlowRateReader.flowRate;
 		refluxTemperature = RefluxTemperatureReader.temperature;
 		reservoirLevel = ReservoirLevelReader.reservoirLevel;
+	}
+	
+	private static void fillValuesInTextFile() {
+		String[] content = DOS.programms.get("werte.txt").getContents();
+		
+		for (int j = 0; j < content.length; j++) {
+					
+			content[j] = content[j].replaceFirst("¢", String.valueOf(TemperatureReader.temperature));
+			content[j] = content[j].replaceFirst("£", String.valueOf(FlowRateReader.flowRate));
+			content[j] = content[j].replaceFirst("¤", String.valueOf(RefluxTemperatureReader.temperature));
+			content[j] = content[j].replaceFirst("¥", String.valueOf(ReservoirLevelReader.reservoirLevel));
+		}
+
+		DOS.programms.get("werte.txt").setContents(content);
 	}
 	
 	private static void resetValues() {
