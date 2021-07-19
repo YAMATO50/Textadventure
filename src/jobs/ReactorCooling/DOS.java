@@ -77,15 +77,12 @@ public class DOS {
 				}
 			} else if (validFile(command)){
 				if (currentIntLocation == dosElement.get(currentRequest).origin) {
-					if (dosElement.get(currentRequest).type == 1) {
-						printFileContent(dosElement.get(currentRequest).fileContent);
-					} else {
+					command = command.toLowerCase();
 						try {
 							programms.get(command).execute();
 						} catch (NullPointerException e) {
 							//File not Found
 						}
-					}
 				} else {
 					System.out.println("Der Befehl \"" + args_[0] + "\" ist entweder falsch geschrieben oder \nkonnte nicht gefunden werden");
 				}
