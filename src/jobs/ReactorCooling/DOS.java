@@ -18,8 +18,8 @@ public class DOS {
 	
 	public static void console() {
 		ContentFiller.fill();
-		ContentFiller.setValues();
 		ContentFiller.fillProgramms();
+		ContentFiller.setValues();
 		loop = true;
 		String command;
 		currentIntLocation = 0;
@@ -54,7 +54,7 @@ public class DOS {
 			command = getInput();
 			args_ = command.split(" ");
 			
-			if (validCommand(command)) {
+			if (validCommand(args_[0])) {
 				args_[0] = args_[0].toLowerCase();
 				try {
 					programms.get(args_[0]).execute();
@@ -62,6 +62,7 @@ public class DOS {
 					//Unknown Command
 				}
 			} else if (validFile(command)){
+				System.out.println();
 				if (currentIntLocation == dosElement.get(currentRequest).origin) {
 					command = command.toLowerCase();
 						try {
