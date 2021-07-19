@@ -113,14 +113,14 @@ public class ReactorCooling {
 			System.out.println("Nach dem er sich die datei kurz angesehen hat dreht er sich um zu dir.");
 			TextTools.slowTextln("Du willst fertig sein?! Definitiv nicht! Hier ist mindesten ein wert nicht korrekt eingestellt!"
 					+ "\n" + "Dafür kann ich dich nicht bezahlen! Ich muss jetzt noch jemanden suchen der das hier in Ordnung bringt..."
-					+ "\n" + "Schönen tag noch...");
+					+ "\n" + "Schönen tag noch...",30);
 			System.out.println("Etwas verärgert geht der Leiter der Reaktorkuppel weg.");
 			
 			if (DOS.errorOccured) {
 				System.out.println();
 				System.out.println("Was möchtest du tun?");
 				System.out.println("[1] Gehen");
-				System.out.println("[2] Dem Leiter nahlaufen und sagen dass ein Fehler aufgetreten ist");
+				System.out.println("[2] Dem Leiter nachlaufen und sagen dass ein Fehler aufgetreten ist");
 				System.out.println();
 				
 				int choice;

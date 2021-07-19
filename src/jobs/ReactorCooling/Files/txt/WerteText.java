@@ -29,7 +29,7 @@ public class WerteText implements DOSProgrammInterface {
 	public void execute() {
 		
 		for (int i = 0; i < this.content.length; i++) {
-			System.out.println(this.content[i] + "\n");
+			System.out.println(this.content[i]);
 		}
 
 	}
