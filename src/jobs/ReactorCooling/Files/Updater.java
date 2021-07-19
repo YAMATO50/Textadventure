@@ -1,10 +1,16 @@
-package jobs.ReactorCooling;
+package jobs.ReactorCooling.Files;
 
-public class Updater {
+import jobs.ReactorCooling.Parameters;
+import jobs.ReactorCooling.ContentFiller;
+import jobs.ReactorCooling.DOS;
+import jobs.ReactorCooling.FlowRateReader;
+import jobs.ReactorCooling.RefluxTemperatureReader;
+import jobs.ReactorCooling.ReservoirLevelReader;
+import jobs.ReactorCooling.TemperatureReader;
+
+public class Updater implements DOSProgrammInterface {
 	
-	public static boolean succes;
-	
-	public static void update() {
+	public void execute() {
 		int temperaturDiff, flowRateDiff, refluxTemperaturDiff, reservoirLevelDiff;
 		
 		temperaturDiff = Math.abs(ContentFiller.targetTemperature - TemperatureReader.temperature);
@@ -45,12 +51,12 @@ public class Updater {
 			System.out.println();
 			
 			do {
-				choice = ChangeParameter.getUserInput();
+				choice = Parameters.getUserInput();
 				
 				switch (choice) {
 				case 1:
 					DOS.loop = false;
-					succes = true;
+					Parameters.succes = true;
 					break;
 				case 2:
 					break;
@@ -93,12 +99,12 @@ public class Updater {
 			System.out.println();
 			
 			do {
-				choice = ChangeParameter.getUserInput();
+				choice = Parameters.getUserInput();
 				
 				switch (choice) {
 				case 1:
 					DOS.loop = false;
-					succes = false;
+					Parameters.succes = false;
 					break;
 				case 2:
 					break;
@@ -110,5 +116,5 @@ public class Updater {
 			} while (choice == -1);
 		}
 	}
-	
+
 }

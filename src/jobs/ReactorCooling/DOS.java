@@ -3,8 +3,10 @@ package jobs.ReactorCooling;
 import java.util.concurrent.ThreadLocalRandom;
 
 import adventure.text.Config;
+import jobs.ReactorCooling.Files.DOSProgrammInterface;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DOS {
 
@@ -13,10 +15,12 @@ public class DOS {
 	static boolean errorOccured = false;
 	public static ArrayList<DosElement> dosElement;
 	public static boolean loop;
+	public static HashMap<String, DOSProgrammInterface> programms;
 	
 	public static void console() {
 		ContentFiller.fill();
 		ContentFiller.setValues();
+		ContentFiller.fillProgramms();
 		loop = true;
 		String command;
 		currentIntLocation = 0;
@@ -76,22 +80,10 @@ public class DOS {
 					if (dosElement.get(currentRequest).type == 1) {
 						printFileContent(dosElement.get(currentRequest).fileContent);
 					} else {
-						switch (dosElement.get(currentRequest).location) {
-						case 4:
-							Updater.update();
-							break;
-						case 9:
-							ChangeParameter.flowRate();
-							break;
-						case 12:
-							ChangeParameter.temperature();
-							break;
-						case 15:
-							ChangeParameter.reservoirLevel();
-							break;
-						case 19:
-							ChangeParameter.refluxTemperature();
-							break;
+						try {
+							programms.get(command).execute();
+						} catch (NullPointerException e) {
+							//File not Found
 						}
 					}
 				} else {

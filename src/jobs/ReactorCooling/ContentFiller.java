@@ -1,6 +1,14 @@
 package jobs.ReactorCooling;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
+
+import jobs.ReactorCooling.Files.DOSProgrammInterface;
+import jobs.ReactorCooling.Files.FlowRate;
+import jobs.ReactorCooling.Files.RefluxTemperature;
+import jobs.ReactorCooling.Files.ReservoirLevel;
+import jobs.ReactorCooling.Files.Temperature;
+import jobs.ReactorCooling.Files.Updater;
 
 public class ContentFiller {
 
@@ -199,8 +207,8 @@ public class ContentFiller {
 		int cooling = ThreadLocalRandom.current().nextInt(2,9);
 		int heating = ThreadLocalRandom.current().nextInt(4,7);
 		
-		ChangeParameter.sublimationRate = cooling;
-		ChangeParameter.solarRate = heating;
+		Parameters.sublimationRate = cooling;
+		Parameters.solarRate = heating;
 		
 		int coolingSteps = ThreadLocalRandom.current().nextInt(1-cooling,9-cooling);
 		
@@ -209,14 +217,14 @@ public class ContentFiller {
 			
 			for (int i = 0; i < coolingSteps; i++) {
 				TemperatureReader.temperature += 2;
-				ChangeParameter.sublimationRate -= 1;
+				Parameters.sublimationRate -= 1;
 				Tick.simulateTick();
 			}
 			Tick.simulateTick();
 		} else {
 			for (int i = 0; i < coolingSteps; i++) {
 				TemperatureReader.temperature -= 2;
-				ChangeParameter.sublimationRate += 1;
+				Parameters.sublimationRate += 1;
 				Tick.simulateTick();
 			}
 			Tick.simulateTick();
@@ -230,21 +238,21 @@ public class ContentFiller {
 			
 			for (int i = 0; i < solarSteps; i++) {
 				TemperatureReader.temperature -= 8;
-				ChangeParameter.solarRate -= 1;
+				Parameters.solarRate -= 1;
 				Tick.simulateTick();
 			}
 			Tick.simulateTick();
 		} else {
 			for (int i = 0; i < solarSteps; i++) {
 				TemperatureReader.temperature += 8;
-				ChangeParameter.solarRate += 1;
+				Parameters.solarRate += 1;
 				Tick.simulateTick();
 			}
 			Tick.simulateTick();
 		}
 		
-		ChangeParameter.sublimationRate = cooling * 10;
-		ChangeParameter.solarRate = heating * 10;
+		Parameters.sublimationRate = cooling * 10;
+		Parameters.solarRate = heating * 10;
 		
 	}
 	
@@ -254,7 +262,7 @@ public class ContentFiller {
 		//Defining "0"
 		int flowRate = currentFlow;
 		
-		ChangeParameter.pumpPower = flowRate;
+		Parameters.pumpPower = flowRate;
 		
 		int flowSteps = ThreadLocalRandom.current().nextInt(200-flowRate,1000-flowRate);
 		
@@ -263,20 +271,20 @@ public class ContentFiller {
 			
 			for (int i = 0; i < flowSteps; i++) {
 				FlowRateReader.flowRate -= 1;
-				ChangeParameter.pumpPower -= 1;
+				Parameters.pumpPower -= 1;
 				Tick.simulateTick();
 			}
 			Tick.simulateTick();
 		} else {
 			for (int i = 0; i < flowSteps; i++) {
 				FlowRateReader.flowRate += 1;
-				ChangeParameter.pumpPower += 1;
+				Parameters.pumpPower += 1;
 				Tick.simulateTick();
 			}
 			Tick.simulateTick();
 		}
 		
-		ChangeParameter.pumpPower = flowRate;
+		Parameters.pumpPower = flowRate;
 		
 	}
 	
@@ -285,8 +293,8 @@ public class ContentFiller {
 		int cooling = ThreadLocalRandom.current().nextInt(2,9);
 		int heating = ThreadLocalRandom.current().nextInt(10,40);
 		
-		ChangeParameter.refluxSublimationRate = cooling;
-		ChangeParameter.refluxHeatPower = heating;
+		Parameters.refluxSublimationRate = cooling;
+		Parameters.refluxHeatPower = heating;
 		
 		int coolingSteps = ThreadLocalRandom.current().nextInt(1-cooling,9-cooling);
 		
@@ -295,14 +303,14 @@ public class ContentFiller {
 			
 			for (int i = 0; i < coolingSteps; i++) {
 				RefluxTemperatureReader.temperature += 10;
-				ChangeParameter.refluxSublimationRate -= 1;
+				Parameters.refluxSublimationRate -= 1;
 				Tick.simulateTick();
 			}
 			Tick.simulateTick();
 		} else {
 			for (int i = 0; i < coolingSteps; i++) {
 				RefluxTemperatureReader.temperature -= 10;
-				ChangeParameter.refluxSublimationRate += 1;
+				Parameters.refluxSublimationRate += 1;
 				Tick.simulateTick();
 			}
 			Tick.simulateTick();
@@ -315,21 +323,21 @@ public class ContentFiller {
 			
 			for (int i = 0; i < heaterSteps; i++) {
 				RefluxTemperatureReader.temperature -= 5;
-				ChangeParameter.refluxHeatPower -= 10;
+				Parameters.refluxHeatPower -= 10;
 				Tick.simulateTick();
 			}
 			Tick.simulateTick();
 		} else {
 			for (int i = 0; i < heaterSteps; i++) {
 				RefluxTemperatureReader.temperature += 5;
-				ChangeParameter.refluxHeatPower += 10;
+				Parameters.refluxHeatPower += 10;
 				Tick.simulateTick();
 			}
 			Tick.simulateTick();
 		}
 		
-		ChangeParameter.refluxSublimationRate = cooling * 10;
-		ChangeParameter.refluxHeatPower = heating * 10;
+		Parameters.refluxSublimationRate = cooling * 10;
+		Parameters.refluxHeatPower = heating * 10;
 		
 		
 	}
@@ -339,8 +347,8 @@ public class ContentFiller {
 		int sublimationParts = ThreadLocalRandom.current().nextInt(2,9);
 		int fasterGain = ThreadLocalRandom.current().nextInt(2,9);
 		
-		ChangeParameter.reservoirSublimationRate = sublimationParts;
-		ChangeParameter.getRefluxWaterRate = fasterGain;
+		Parameters.reservoirSublimationRate = sublimationParts;
+		Parameters.getRefluxWaterRate = fasterGain;
 		
 		int sublimationRateSteps = ThreadLocalRandom.current().nextInt(1-sublimationParts,9-sublimationParts);
 		
@@ -349,14 +357,14 @@ public class ContentFiller {
 			
 			for (int i = 0; i < sublimationRateSteps; i++) {
 				ReservoirLevelReader.reservoirLevel += 10;
-				ChangeParameter.reservoirSublimationRate -= 1;
+				Parameters.reservoirSublimationRate -= 1;
 				Tick.simulateTick();
 			}
 			Tick.simulateTick();
 		} else {
 			for (int i = 0; i < sublimationRateSteps; i++) {
 				ReservoirLevelReader.reservoirLevel -= 10;
-				ChangeParameter.reservoirSublimationRate += 1;
+				Parameters.reservoirSublimationRate += 1;
 				Tick.simulateTick();
 			}
 			Tick.simulateTick();
@@ -369,21 +377,21 @@ public class ContentFiller {
 			
 			for (int i = 0; i < fasterGainSteps; i++) {
 				ReservoirLevelReader.reservoirLevel -= 10;
-				ChangeParameter.getRefluxWaterRate -= 1;
+				Parameters.getRefluxWaterRate -= 1;
 				Tick.simulateTick();
 			}
 			Tick.simulateTick();
 		} else {
 			for (int i = 0; i < fasterGainSteps; i++) {
 				ReservoirLevelReader.reservoirLevel += 10;
-				ChangeParameter.getRefluxWaterRate += 1;
+				Parameters.getRefluxWaterRate += 1;
 				Tick.simulateTick();
 			}
 			Tick.simulateTick();
 		}
 		
-		ChangeParameter.reservoirSublimationRate = sublimationParts * 10;
-		ChangeParameter.getRefluxWaterRate = fasterGain * 10;
+		Parameters.reservoirSublimationRate = sublimationParts * 10;
+		Parameters.getRefluxWaterRate = fasterGain * 10;
 		
 	}
 	
@@ -404,5 +412,14 @@ public class ContentFiller {
 		FlowRateReader.flowRate = flowRate;
 		RefluxTemperatureReader.temperature = refluxTemperature;
 		ReservoirLevelReader.reservoirLevel = reservoirLevel;
+	}
+	
+	public static void fillProgramms() {
+		DOS.programms = new HashMap<String, DOSProgrammInterface>();
+		DOS.programms.put("pumpen.exe", new FlowRate());
+		DOS.programms.put("Kuehlwassertemperatur.exe", new Temperature());
+		DOS.programms.put("reservoir.exe", new ReservoirLevel());
+		DOS.programms.put("rueckflusstemperatur.exe", new RefluxTemperature());
+		DOS.programms.put("update.exe", new Updater());
 	}
 }

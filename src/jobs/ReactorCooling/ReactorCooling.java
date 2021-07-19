@@ -71,7 +71,7 @@ public class ReactorCooling {
 	private static void dos() {
 		DOS.console();
 		
-		if (Updater.succes) {
+		if (Parameters.succes) {
 			System.out.println("Du stehst auf und gehst zu Tobias Ingram.");
 			TextAdventure.wait(1000);
 			TextTools.slowTextln("Oh du bist fertig! Sehr schön. Dann lass mich mal sehen ob du alles richtig gemacht hast.",30);
