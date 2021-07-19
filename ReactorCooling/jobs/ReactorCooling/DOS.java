@@ -87,6 +87,11 @@ public class DOS {
 	}
 	
 	private static boolean validCommand(String command) {
+		
+		if (command.equals("cd..") || command.equals("cd.")) {
+			return true;
+		}
+		
 		return programms.containsKey(command.toLowerCase());
 	}
 	
