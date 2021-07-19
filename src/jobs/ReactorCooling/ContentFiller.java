@@ -3,12 +3,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
-import jobs.ReactorCooling.Files.DOSProgrammInterface;
-import jobs.ReactorCooling.Files.FlowRate;
-import jobs.ReactorCooling.Files.RefluxTemperature;
-import jobs.ReactorCooling.Files.ReservoirLevel;
-import jobs.ReactorCooling.Files.Temperature;
-import jobs.ReactorCooling.Files.Updater;
+import jobs.ReactorCooling.Files.*;
+import jobs.ReactorCooling.Files.exe.*;
+import jobs.ReactorCooling.Files.txt.*;
 
 public class ContentFiller {
 
@@ -29,139 +26,14 @@ public class ContentFiller {
 		dosElement.add(new DosElement(15,2,2,"Reservoir.exe")); // reservoir
 		dosElement.add(new DosElement(19,18,2,"Rueckflusstemperatur.exe")); //temp rück
 		
-		String[] 	content = new String[] {	
-						"Befehle:",
-						"",
-						"DIR\tListet die Dateien und Unterverzeichnisse des aktuellen Verzeichnisses auf",
-						"\ttipp: Gib jedes mal wenn du den ordner wechselst DIR ein",
-						"CD\tÄndert das Verzeichniss in das dahinter angegebene Verzeichniss",
-						"\tBesonderheiten:",
-						"\t.\tÄndert nichts",
-						"\t..\tGeht ein Verzeichniss zurück",
-						"ECHO\tGibt die dahinter angegebene nachricht aus",
-						"",
-						"Um eine Datei zu öffnen gib einfach den Namen der Datei ein (mit Endung)",
-						"",
-						"<DIR> = Verzeichnis = Ordner",
-						"",
-						"Funktionsweise:",
-						"",
-						"In den Verzeichnissen findest du Verzeichnisse und Dateien die du öffnen kannst, indem du \"cd [name]\" für Verzeichnisse",
-						"oder den Dateinamen + Endung eingibst.",
-						"In einer .exe Datei siehst du alle Werte und kannst für bestimmte Werte die Parameter anpassen.",
-						"Verschiedene Zustände beeinflussen sich, sodass z.b. das Ändern der Durchflussrate die Temperatur beeinflusst.",
-						"Gewisse werte dürfen einen bestimmten wert nicht überschreiten oder unterschreiten. Weitere informationen dazu",
-						"in der \"werte.txt\".",
-						"Wenn du fertig bist, führe die \"update.exe\" aus. Wenn alle werte stimmen, erhälst du dein Gehalt von Tobias Ingram."};
+		String[] content = new String[] {""};
+		
 		dosElement.add(new DosElement(5,0,1,"help.txt",content));
-					content = new String[] {
-						"Hier sind die werte eingetragen die erreicht werden müssen. Die Werte ändern sich täglich entsprechend des",
-						"Stromverbrauches der Mondbasis. Diese werte müssen innerhalb gewisser tolleranzen eingehalten werden.",
-						"",
-						"Werte:",
-						"",
-						"Kühlwasser:",
-						"",
-						"Temperatur:\t¢°C",
-						"Toleranz:\t+/- 2°C",
-						"",
-						"Durchfluss:\t£ L/s",
-						"Toleranz:\t+/- 100 L/s",
-						"",
-						"Rückwasser:",
-						"",
-						"Temperatur:\t¤°C",
-						"Toleranz:\t+/- 5°C",
-						"",
-						"Reservoir:\t¥% gefüllt",
-						"Toleranz:\t+/- 4%"}; //The symbols ¢, £, ¤, ¥ are later replaced with the actual numbers
 		dosElement.add(new DosElement(6,0,1,"werte.txt",content));
-					content = new String[] {
-						"Der Durchfluss ist die menge an Wasser, die vom Reservoir zum Reaktor geleitet wird",
-						"",
-						"Die leistung der Pumpen regulieren den Durchfluss",
-						"",
-						"Änderung der Pumpenleistung:\t\t+ 10 GW (= Minimale Schrittweite)",
-						"Resultierende Durchflussänderung:\t+ 10 L/s",
-						"",
-						"Änderung der Pumpenleistung:\t\t- 10 GW (= Minimale Schrittweite)",
-						"Resultierende Durchflussänderung:\t- 10 L/s",
-						"",
-						"Maximale Pumpleistung: 300 GW pro Pumpe",
-						"",
-						"Beeinflusst durch änderung:",
-						"",
-						"Reservoirstand",
-						"Rückwassertemperatur"};
-			dosElement.add(new DosElement(11,7,1,"info.txt",content));
-					content = new String[] {
-						"Die Kühlwassertemperatur ist die Temperatur die das Kühlwasser hat bevor es in den Reaktor geleitet wird",
-						"",
-						"Die Temperatur wird reguliert durch Sublimationskühlung und durch erwärmen mit Solarzellen",
-						"",
-						"Änderung des durchflussanteils durch die Sublimationskühlung:\t+ 5% (= Minimale Schrittweite)",
-						"Resultierende Temperaturänderung:\t\t\t\t- 1°C",
-						"",
-						"Änderung des durchflussanteils durch die Sublimationskühlung:\t- 5% (= Minimale Schrittweite)",
-						"Resultierende Temperaturänderung:\t\t\t\t+ 1°C",
-						"",
-						"",
-						"Änderung der durchflussanteils durch die Solarzellen:\t\t+ 5% (= Minimale Schrittweite)",
-						"Resultierende Temperaturänderung:\t\t\t\t+ 4°C",
-						"",
-						"Änderung der durchflussanteils durch die Solarzellen:\t\t- 5% (= Minimale Schrittweite)",
-						"Resultierende Temperaturänderung:\t\t\t\t- 4°C",
-						"",
-						"Beeinflusst durch änderung:",
-						"",
-						"Rückwassertemperatur"};
-		dosElement.add(new DosElement(14,8,1,"info.txt",content));
-					content = new String[] {
-						"Das Reservoir beinhaltet eine große menge an Wasser die zum Kühlen verwendet wird",
-						"",
-						"Der Füllstand wird reguliert durch abgeben von Wasser an die Sublimationskühlanlage und durch",
-						"schnelleres erhalten von Rückwasser",
-						"",
-						"Änderung der Wasseranteile in die Sublimationskühlung:\t+ 5% (= Minimale Schrittweite)",
-						"Resultierende Reservoirfüllstandsänderung:\t\t- 5%",
-						"",
-						"Änderung der Wasseranteile in die Sublimationskühlung:\t- 5% (= Minimale Schrittweite)",
-						"Resultierende Reservoirfüllstandsänderung:\t\t+ 5%",
-						"",
-						"",
-						"Änderung der geschwindigkeit des Rückwassererhalts:\t+ 5% (= Minimale Schrittweite)",
-						"Resultierende Reservoirfüllstandsänderung:\t\t+ 5%",
-						"",
-						"Änderung der geschwindigkeit des Rückwassererhalts:\t- 5% (= Minimale Schrittweite)",
-						"Resultierende Reservoirfüllstandsänderung:\t\t- 5%",
-						"",
-						"Beeinflusst durch änderung:",
-						"",
-						"Kühlwassertemperatur"};
-		dosElement.add(new DosElement(17,2,1,"info.txt",content));
-					content = new String[] {
-						"Die Rückwassertemperatur ist die Temperatur die das Kühlwasser hat nachdem es in den Reaktor geleitet wurde",
-						"Bevor das Rückwasser ins Reservoir geleitet wird wird es weiter abkühlen gelassen (nicht relevant)",
-						"",
-						"Die Temperatur wird reguliert durch Sublimationskühlung und Heizleistung in der Kuppel",
-						"",
-						"Änderung des durchflussanteils durch die Sublimationskühlung:\t+ 5% (= Minimale Schrittweite)",
-						"Resultierende Temperaturänderung:\t\t\t\t- 5°C",
-						"",
-						"Änderung des durchflussanteils durch die Sublimationskühlung:\t- 5% (= Minimale Schrittweite)",
-						"Resultierende Temperaturänderung:\t\t\t\t+ 5°C",
-						"",
-						"",
-						"Änderung der Heizleistung:\t\t\t\t\t+ 10 MW (= Minimale Schrittweite)",
-						"Resultierende Temperaturänderung:\t\t\t\t- 5°C",
-						"",
-						"Änderung der Heizleistung:\t\t\t\t\t- 10 MW (= Minimale Schrittweite)",
-						"Resultierende Temperaturänderung:\t\t\t\t+ 5°C",
-						"",
-						"Beeinflusst durch änderung:",
-						"",
-						"Kühlwassertemperatur"};
-		dosElement.add(new DosElement(21,18,1,"info.txt",content));
+		dosElement.add(new DosElement(11,7,1,"FlowrateInfo.txt",content));
+		dosElement.add(new DosElement(14,8,1,"TemperatureInfo.txt",content));
+		dosElement.add(new DosElement(17,2,1,"ReservoirInfo.txt",content));
+		dosElement.add(new DosElement(21,18,1,"RefluxInfo.txt",content));
 			
 		DOS.dosElement = dosElement;
 	}
@@ -421,5 +293,12 @@ public class ContentFiller {
 		DOS.programms.put("reservoir.exe", new ReservoirLevel());
 		DOS.programms.put("rueckflusstemperatur.exe", new RefluxTemperature());
 		DOS.programms.put("update.exe", new Updater());
+		
+		DOS.programms.put("help.txt", new HelpText());
+		DOS.programms.put("werte.txt", new WerteText());
+		DOS.programms.put("flowrateinfo.txt", new FlowrateInfoText());
+		DOS.programms.put("temperatureinfo.txt", new TemperatureInfoText());
+		DOS.programms.put("reservoirinfo.txt", new ReservoirInfoText());
+		DOS.programms.put("refluxinfo.txt", new RefluxInfoText());
 	}
 }
