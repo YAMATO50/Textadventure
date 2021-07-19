@@ -7,7 +7,7 @@ import adventure.text.TextTools;
 public class ReactorCooling {
 
 	private static boolean succes;
-	private static int talkingSpeed = 30;
+	private static int talkingSpeed = 15 * Config.talkSpeedLevel;
 	
 	public static boolean start() {
 		
