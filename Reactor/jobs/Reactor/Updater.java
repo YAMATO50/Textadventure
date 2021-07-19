@@ -27,7 +27,7 @@ public class Updater {
 			System.out.println();
 			
 			do {
-				choice = ChangeParameter.getUserInput();
+				choice = Parameters.getUserInput();
 				
 				switch (choice) {
 				case 1:
@@ -55,7 +55,7 @@ public class Updater {
 			System.out.println();
 			
 			do {
-				choice = ChangeParameter.getUserInput();
+				choice = Parameters.getUserInput();
 				
 				switch (choice) {
 				case 1:

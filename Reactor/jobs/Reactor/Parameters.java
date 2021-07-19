@@ -4,7 +4,7 @@ import adventure.text.Config;
 import adventure.text.TextAdventure;
 import adventure.text.TextTools;
 
-public class ChangeParameter {
+public class Parameters {
 
 	public static void fuelRods() {
 		

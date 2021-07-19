@@ -81,13 +81,13 @@ public class DOS {
 							Updater.update();
 							break;
 						case 7:
-							ChangeParameter.fuelRods();
+							Parameters.fuelRods();
 							break;
 						case 9:
-							ChangeParameter.controllRods();
+							Parameters.controllRods();
 							break;
 						case 11:
-							ChangeParameter.temperature();
+							Parameters.temperature();
 							break;
 						}
 					}
