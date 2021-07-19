@@ -1,9 +1,10 @@
-package jobs.ReactorCooling.Files;
+package jobs.ReactorCooling.Files.exe;
 
 import adventure.text.TextTools;
 import jobs.ReactorCooling.Parameters;
 import jobs.ReactorCooling.FlowRateReader;
 import jobs.ReactorCooling.Tick;
+import jobs.ReactorCooling.Files.DOSProgrammInterface;
 
 public class FlowRate implements DOSProgrammInterface {
 

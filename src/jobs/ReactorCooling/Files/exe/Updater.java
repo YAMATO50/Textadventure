@@ -1,4 +1,4 @@
-package jobs.ReactorCooling.Files;
+package jobs.ReactorCooling.Files.exe;
 
 import jobs.ReactorCooling.Parameters;
 import jobs.ReactorCooling.ContentFiller;
@@ -7,6 +7,7 @@ import jobs.ReactorCooling.FlowRateReader;
 import jobs.ReactorCooling.RefluxTemperatureReader;
 import jobs.ReactorCooling.ReservoirLevelReader;
 import jobs.ReactorCooling.TemperatureReader;
+import jobs.ReactorCooling.Files.DOSProgrammInterface;
 
 public class Updater implements DOSProgrammInterface {
 	
