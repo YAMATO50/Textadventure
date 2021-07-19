@@ -86,22 +86,7 @@ public class DOS {
 	}
 	
 	private static boolean validCommand(String command) {
-		String[] args = command.split(" ");
-		args[0] = args[0].toLowerCase();
-		switch (args[0]) {
-		case "dir":
-			return true;
-		case "cd":
-		case "cd.":
-		case "cd..":
-			return true;
-		case "echo":
-			return true;
-		case "help":
-			return true;
-		default:
-			return false;
-		}
+		return programms.containsKey(command.toLowerCase());
 	}
 	
 	private static boolean validFile(String fileName) {
