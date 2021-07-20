@@ -9,6 +9,7 @@ public class Config {
 	public static Food food;
 	public static Beverages beverage;
 	public static Save save;
+	public static int talkSpeedLevel = 2; //4 = slow, 2 = normal, 1 = fast
 	public static Scanner keyScan = new Scanner(System.in);
 	
 	public static void main(String[] args) {
