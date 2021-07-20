@@ -41,6 +41,7 @@ public class Tick {
 		lastFuelRodAmount = FuelRodReader.fuelRodAmount;
 		lastControllRodDepth = ControllRodDepthReader.controllRodDepth;
 		lastTemperature = TemperatureReader.temperature;
+		
 	}
 	
 	static int simulatedLastFuelRodAmount;
@@ -83,5 +84,6 @@ public class Tick {
 		simulatedLastFuelRodAmount = FuelRodReader.fuelRodAmount;
 		simulatedLastControllRodDepth = ControllRodDepthReader.controllRodDepth;
 		simulatedLastTemperature = TemperatureReader.temperature;
+		
 	}
 }

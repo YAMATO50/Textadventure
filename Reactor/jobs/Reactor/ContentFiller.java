@@ -113,7 +113,35 @@ public class ContentFiller {
 		controllRodsPowerSetter();
 		temperaturePowerSetter();
 		
+		Tick.simulatedTick();
+		
 		targetPower = PowerReader.power;
+		
+		if (targetPower < 0) {
+			targetPower = targetPower *-1;
+			if (targetPower < 200) {
+				targetPower = ThreadLocalRandom.current().nextInt(427, 846) - targetPower;
+			} else if (targetPower < 400) {
+				targetPower = ThreadLocalRandom.current().nextInt(549, 853) - targetPower;
+			} else if (targetPower < 600) {
+				targetPower = ThreadLocalRandom.current().nextInt(682, 807) - targetPower;
+			} else {
+				targetPower = ThreadLocalRandom.current().nextInt(819, 945) - targetPower;
+			}
+		} else {
+			if (targetPower < 200) {
+				targetPower = ThreadLocalRandom.current().nextInt(427, 846) + targetPower;
+			} else if (targetPower < 400) {
+				targetPower = ThreadLocalRandom.current().nextInt(549, 653) + targetPower;
+			} else if (targetPower < 600) {
+				targetPower = ThreadLocalRandom.current().nextInt(418, 527) + targetPower;
+			} else {
+				targetPower = ThreadLocalRandom.current().nextInt(228, 469) + targetPower;
+			}
+		}
+		
+		PowerReader.power = targetPower + PowerReader.power;
+		power = PowerReader.power;
 		
 		for (int i = 0; i < DOS.dosElement.size(); i++) {
 			if (DOS.dosElement.get(i).location == 6) {
@@ -143,13 +171,11 @@ public class ContentFiller {
 			
 			for (int i = 0; i < fuelRodAmountChange; i++) {
 				FuelRodReader.fuelRodAmount = FuelRodReader.fuelRodAmount - 1;
-				Tick.simulatedTick();
 			}
 			Tick.simulatedTick();
 		} else {
 			for (int i = 0; i < fuelRodAmountChange; i++) {
 				FuelRodReader.fuelRodAmount = FuelRodReader.fuelRodAmount + 1;
-				Tick.simulatedTick();
 			}
 			Tick.simulatedTick();
 		}
@@ -163,13 +189,11 @@ public class ContentFiller {
 			
 			for (int i = 0; i < controllRodDepthChange; i++) {
 				ControllRodDepthReader.controllRodDepth = ControllRodDepthReader.controllRodDepth - 1;
-				Tick.simulatedTick();
 			}
 			Tick.simulatedTick();
 		} else {
 			for (int i = 0; i < controllRodDepthChange; i++) {
 				ControllRodDepthReader.controllRodDepth = ControllRodDepthReader.controllRodDepth + 1;
-				Tick.simulatedTick();
 			}
 			Tick.simulatedTick();
 		}
@@ -183,13 +207,11 @@ public class ContentFiller {
 			
 			for (int i = 0; i < temperatureChange; i++) {
 				TemperatureReader.temperature = TemperatureReader.temperature - 1;
-				Tick.simulatedTick();
 			}
 			Tick.simulatedTick();
 		} else {
 			for (int i = 0; i < temperatureChange; i++) {
 				TemperatureReader.temperature = TemperatureReader.temperature + 1;
-				Tick.simulatedTick();
 			}
 			Tick.simulatedTick();
 		}
@@ -199,12 +221,15 @@ public class ContentFiller {
 		FuelRodReader.fuelRodAmount = ThreadLocalRandom.current().nextInt(2, 7);
 		ControllRodDepthReader.controllRodDepth = ThreadLocalRandom.current().nextInt(15, 48);
 		TemperatureReader.temperature = ThreadLocalRandom.current().nextInt(311, 469);
-		PowerReader.power = ThreadLocalRandom.current().nextInt(217, 789);
+		
+		//PowerReader.power = ThreadLocalRandom.current().nextInt(217, 789);
+		PowerReader.power = 0;
+		
 		Tick.simulatedFirstTick();
+		
 		fuelRodAmount = FuelRodReader.fuelRodAmount;
 		controllRodDepth = ControllRodDepthReader.controllRodDepth;
 		temperature = TemperatureReader.temperature;
-		power = PowerReader.power;
 	}
 	
 	private static void resetValues() {
