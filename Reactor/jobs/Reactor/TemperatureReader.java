@@ -2,6 +2,6 @@ package jobs.Reactor;
 
 public class TemperatureReader {
 
-	public static int temperature;
+	public static int temperature2;
 	
 }
