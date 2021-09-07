@@ -8,4 +8,7 @@ public interface DOSProgrammInterface {
 	
 	public void setContents(String[] content);
 	
+	public int getLocation();
+	
+	public void setLocation(int location);
 }

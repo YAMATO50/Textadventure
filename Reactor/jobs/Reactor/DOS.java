@@ -3,19 +3,25 @@ package jobs.Reactor;
 import java.util.concurrent.ThreadLocalRandom;
 
 import adventure.text.Config;
+import jobs.Reactor.Files.DOSProgrammInterface;
+import jobs.Reactor.directory.Directory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DOS {
 
-	static int currentIntLocation;
-	static int currentRequest;
-	static boolean errorOccured = false;
+	public static int currentIntLocation;
+	public static int currentRequest;
+	public static boolean errorOccured = false;
 	public static ArrayList<DosElement> dosElement;
 	public static boolean loop;
+	public static HashMap<String, DOSProgrammInterface> programms;
+	public static String[] args_;
+	public static ArrayList<Directory> folders;
 	
 	public static void console() {
-		ContentFiller.fill();
+		ContentFiller.fillProgramms();
 		ContentFiller.setValues();
 		loop = true;
 		String command;
@@ -49,7 +55,13 @@ public class DOS {
 			
 			System.out.print(currentLocation + ">");
 			command = getInput();
-			String[] args_ = command.split(" ");
+			args_ = command.split(" ");
+			
+			try {
+				programms.get(args_[0]).execute();
+			} catch (NullPointerException e) {
+				//unknown command
+			}
 			
 			if (validCommand(command)) {
 				args_[0] = args_[0].toLowerCase();
@@ -78,7 +90,7 @@ public class DOS {
 					} else {
 						switch (dosElement.get(currentRequest).location) {
 						case 4:
-							Updater.update();
+							UpdaterOld.update();
 							break;
 						case 7:
 							Parameters.fuelRods();
@@ -108,22 +120,11 @@ public class DOS {
 	}
 	
 	private static boolean validCommand(String command) {
-		String[] args = command.split(" ");
-		args[0] = args[0].toLowerCase();
-		switch (args[0]) {
-		case "dir":
+		if (command.equals("cd..") || command.equals("cd.")) {
 			return true;
-		case "cd":
-		case "cd.":
-		case "cd..":
-			return true;
-		case "echo":
-			return true;
-		case "help":
-			return true;
-		default:
-			return false;
 		}
+		
+		return programms.containsKey(command.toLowerCase());
 	}
 	
 	private static void listDirs() {

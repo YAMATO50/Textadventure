@@ -1,16 +1,36 @@
 package jobs.Reactor;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
+
+import jobs.Reactor.Files.DOSProgrammInterface;
+import jobs.Reactor.Files.commands.*;
+import jobs.Reactor.Files.exe.*;
+import jobs.Reactor.Files.txt.TXT;
+import jobs.Reactor.directory.Directory;
 
 public class ContentFiller {
 
 	private static ArrayList<DosElement> dosElement = new ArrayList<DosElement>();
+	private static ArrayList<Directory> folders = new ArrayList<Directory>();
 	
-	public static void fill() {
+	private static void fillOther() {
 		dosElement.add(new DosElement(0,-1,new int[] {1,2,3,4,5,6},0,"D:\\Reactor",false));
 		dosElement.add(new DosElement(1,0,new int[] {7,8},0,"Brennstaebe",true)); //8 = txt, 7 = exe
 		dosElement.add(new DosElement(2,0,new int[] {9,10},0,"Kontrollstaebe",true)); //10 = txt, 9 = exe
 		dosElement.add(new DosElement(3,0,new int[] {11, 12},0,"Temperatur",true)); //12 = txt, 11 = exe
+		
+		folders.add(new Directory(-1, 0, "D:\\Reactor"));
+		folders.add(new Directory(0, 1, "Brennstaebe"));
+		folders.add(new Directory(0, 2, "Kontrollstaebe"));
+		folders.add(new Directory(0, 3, "Temperatur"));
+		
+		DOS.folders = folders;
+		
+		DOS.programms.put("update.exe", new Updater(0));
+		DOS.programms.put("brennstab.exe", new FuelRods(1));
+		DOS.programms.put("kontrollstab.exe", new ControllRods(2));
+		DOS.programms.put("reaktortemperatur.exe", new Temperature(3));
 		
 		dosElement.add(new DosElement(4,0,2,"update.exe")); 
 		dosElement.add(new DosElement(7,1,2,"Brennstab.exe"));
@@ -41,6 +61,7 @@ public class ContentFiller {
 					"in der \"werte.txt\".",
 					"Wenn du fertig bist, führe die \"update.exe\" aus. Wenn alle werte stimmen, erhälst du dein Gehalt von Tobias Ingram."};
 		dosElement.add(new DosElement(5,0,1,"help.txt",content));
+		DOS.programms.put("help.txt", new TXT(content, 0));
 		
 					content = new String[] {
 						"Hier sind die werte eingetragen die erreicht werden müssen. Die Werte ändern sich täglich entsprechend des",
@@ -53,6 +74,7 @@ public class ContentFiller {
 						"Angeforderte Leistung:\t¢ TW",
 						"Toleranz:\t\t+/- 1 TW"}; //The symbol ¢ is later replaced with the actual number
 		dosElement.add(new DosElement(6,0,1,"werte.txt",content));
+		DOS.programms.put("werte.txt", new TXT(content, 0));
 		
 					content = new String[] {
 						"Die Brennstabsanzahl ist die anzahl an Brennstäben, die aktiv und im Reaktor sind.",
@@ -69,6 +91,7 @@ public class ContentFiller {
 						"",
 						"Temperatur"};
 			dosElement.add(new DosElement(8,1,1,"info.txt",content));
+			DOS.programms.put("brennstab_info.txt", new TXT(content, 1));
 			
 					content = new String[] {
 						"Die Kontrollstabstiefe gibt in % an, wie Tief die Kontrollstäbe in den Reaktor eingefahren sind",
@@ -85,6 +108,7 @@ public class ContentFiller {
 						"",
 						"Temperatur"};
 		dosElement.add(new DosElement(10,2,1,"info.txt",content));
+		DOS.programms.put("kontrollstab_info.txt", new TXT(content, 2));
 		
 					content = new String[] {
 						"Die Reaktorkerntemperatur ist die Temperatur, die der Reaktorkern, die Brenn- und Kontrollsäbe und der ",
@@ -99,6 +123,7 @@ public class ContentFiller {
 						"Änderung der Temperatur:\t\t\t- 1°C (= Minimale Schrittweite)",
 						"Resultierende Leistungsänderung:\t\t+ 1 TW"};
 		dosElement.add(new DosElement(12,3,1,"info.txt",content));
+		DOS.programms.put("temperatur_info.txt", new TXT(content, 3));
 			
 		DOS.dosElement = dosElement;
 	}
@@ -115,7 +140,7 @@ public class ContentFiller {
 		
 		Tick.simulatedTick();
 		
-		targetPower = PowerReader.power;
+		targetPower = Parameters.power;
 		
 		if (targetPower < 0) {
 			targetPower = targetPower *-1;
@@ -140,8 +165,8 @@ public class ContentFiller {
 			}
 		}
 		
-		PowerReader.power = targetPower + PowerReader.power;
-		power = PowerReader.power;
+		Parameters.power = targetPower + Parameters.power;
+		power = Parameters.power;
 		
 		for (int i = 0; i < DOS.dosElement.size(); i++) {
 			if (DOS.dosElement.get(i).location == 6) {
@@ -170,12 +195,12 @@ public class ContentFiller {
 			fuelRodAmountChange = fuelRodAmountChange * -1;
 			
 			for (int i = 0; i < fuelRodAmountChange; i++) {
-				FuelRodReader.fuelRodAmount = FuelRodReader.fuelRodAmount - 1;
+				Parameters.fuelRodAmount = Parameters.fuelRodAmount - 1;
 			}
 			Tick.simulatedTick();
 		} else {
 			for (int i = 0; i < fuelRodAmountChange; i++) {
-				FuelRodReader.fuelRodAmount = FuelRodReader.fuelRodAmount + 1;
+				Parameters.fuelRodAmount = Parameters.fuelRodAmount + 1;
 			}
 			Tick.simulatedTick();
 		}
@@ -188,12 +213,12 @@ public class ContentFiller {
 			controllRodDepthChange = controllRodDepthChange * -1;
 			
 			for (int i = 0; i < controllRodDepthChange; i++) {
-				ControllRodDepthReader.controllRodDepth = ControllRodDepthReader.controllRodDepth - 1;
+				Parameters.controllRodDepth = Parameters.controllRodDepth - 1;
 			}
 			Tick.simulatedTick();
 		} else {
 			for (int i = 0; i < controllRodDepthChange; i++) {
-				ControllRodDepthReader.controllRodDepth = ControllRodDepthReader.controllRodDepth + 1;
+				Parameters.controllRodDepth = Parameters.controllRodDepth + 1;
 			}
 			Tick.simulatedTick();
 		}
@@ -206,37 +231,50 @@ public class ContentFiller {
 			temperatureChange = temperatureChange * -1;
 			
 			for (int i = 0; i < temperatureChange; i++) {
-				TemperatureReader.temperature = TemperatureReader.temperature - 1;
+				Parameters.temperature = Parameters.temperature - 1;
 			}
 			Tick.simulatedTick();
 		} else {
 			for (int i = 0; i < temperatureChange; i++) {
-				TemperatureReader.temperature = TemperatureReader.temperature + 1;
+				Parameters.temperature = Parameters.temperature + 1;
 			}
 			Tick.simulatedTick();
 		}
 	}
 	
 	private static void initiateAllValues() {
-		FuelRodReader.fuelRodAmount = ThreadLocalRandom.current().nextInt(2, 7);
-		ControllRodDepthReader.controllRodDepth = ThreadLocalRandom.current().nextInt(15, 48);
-		TemperatureReader.temperature = ThreadLocalRandom.current().nextInt(311, 469);
+		Parameters.fuelRodAmount = ThreadLocalRandom.current().nextInt(2, 7);
+		Parameters.controllRodDepth = ThreadLocalRandom.current().nextInt(15, 48);
+		Parameters.temperature = ThreadLocalRandom.current().nextInt(311, 469);
 		
 		//PowerReader.power = ThreadLocalRandom.current().nextInt(217, 789);
-		PowerReader.power = 0;
+		Parameters.power = 0;
 		
 		Tick.simulatedFirstTick();
 		
-		fuelRodAmount = FuelRodReader.fuelRodAmount;
-		controllRodDepth = ControllRodDepthReader.controllRodDepth;
-		temperature = TemperatureReader.temperature;
+		fuelRodAmount = Parameters.fuelRodAmount;
+		controllRodDepth = Parameters.controllRodDepth;
+		temperature = Parameters.temperature;
 	}
 	
 	private static void resetValues() {
-		FuelRodReader.fuelRodAmount = fuelRodAmount;
-		ControllRodDepthReader.controllRodDepth = controllRodDepth;
-		TemperatureReader.temperature = temperature;
-		PowerReader.power = power;
+		Parameters.fuelRodAmount = fuelRodAmount;
+		Parameters.controllRodDepth = controllRodDepth;
+		Parameters.temperature = temperature;
+		Parameters.power = power;
+	}
+	
+	public static void fillProgramms() {
+		
+		DOS.programms = new HashMap<String, DOSProgrammInterface>();
+		
+		DOS.programms.put("cd", new Cd());
+		DOS.programms.put("dir", new Dir());
+		DOS.programms.put("echo", new Echo());
+		DOS.programms.put("help", new Help());
+		
+		fillOther();
+		
 	}
 	
 }

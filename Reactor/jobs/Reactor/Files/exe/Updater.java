@@ -1,10 +1,28 @@
-package jobs.Reactor;
+package jobs.Reactor.Files.exe;
 
-public class Updater {
+import jobs.Reactor.ContentFiller;
+import jobs.Reactor.DOS;
+import jobs.Reactor.Parameters;
+import jobs.Reactor.PowerReader;
+import jobs.Reactor.Files.DOSProgrammInterface;
+
+public class Updater implements DOSProgrammInterface {
+
+	public Updater(int location) {
+		this.location = location;
+	}
 	
-	public static boolean succes;
+	private int location;
 	
-	public static void update() {
+	public int getLocation() {
+		return this.location;
+	}
+	
+	public void setLocation(int location) {
+		this.location = location;
+	}
+	
+	public void execute() {
 		int powerDiff;
 		
 		powerDiff = Math.abs(ContentFiller.targetPower - PowerReader.power);
@@ -32,7 +50,7 @@ public class Updater {
 				switch (choice) {
 				case 1:
 					DOS.loop = false;
-					succes = true;
+					Parameters.succes = true;
 					break;
 				case 2:
 					break;
@@ -60,7 +78,7 @@ public class Updater {
 				switch (choice) {
 				case 1:
 					DOS.loop = false;
-					succes = false;
+					Parameters.succes = false;
 					break;
 				case 2:
 					break;
@@ -72,5 +90,13 @@ public class Updater {
 			} while (choice == -1);
 		}
 	}
-	
+
+	public String[] getContents() {
+		return null;
+	}
+
+	public void setContents(String[] content) {
+
+	}
+
 }
